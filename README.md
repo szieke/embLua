@@ -4,6 +4,12 @@ The aim of embLua is to provide C/C++ developers the possibility to extend their
 - string module
 - global functions: assert, collectgarbage, error, getmetatable, ipairs, next, pairs, pcall, print, rawequal, rawlen, rawget, rawset, select, setmetatable, tonumber, tostring, type, xpcall
 
+## minimum embLua requirements
+To run run scripts which do someting 'meaningful' embLua needs:
+- 13 Heap
+- 1k stack
+- 132k ROM (not optimized code)
+
 ## Integrating embLua
 To integrate embLua in a custom project:
 - copy the source files embLua/lua into your project
@@ -20,6 +26,7 @@ embLua can be configured to use the build in memory management functions (embLua
 - LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used protect the memory management calls if several Lua instance in different tasks are created
 - DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS: If the build in memory function shall not be used then this define must be set.
 - luaMallocFunction(size) and luaFreeFunction(pointer): These defines must be set if the build in memory management shall not be used (*DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS*)
+- luaPointerSize_t: If the size of size_t is not the pointer size on the current platform then this define must be set (example: on the MSP430 the pointer size is 32Bit but size_t is only 16Bit)
 
 ## Embedding lua scripts
 
