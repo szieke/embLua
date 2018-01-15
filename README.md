@@ -19,7 +19,9 @@ embLua can be configured to use the build in memory management functions (embLua
 If the build in memory function shall not be used then the *DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS* must be set.
 In this case *luaMallocFunction(size)* and *luaFreeFunction(pointer)* must be defined.
 
-If the build in memory functions shall be used and several Lua instance in different tasks are created then *LUA_MEM_ENTER_CRITICAL_SECTION* and *LUA_MEM_LEAVE_CRITICAL_SECTION* must be defined to protect the memory management calls.
+If the build in memory functions shall be used the *LUA_HEAP_SIZE* must be defined. 
+
+If the build in memory functions shall be used the *LUA_HEAP_SIZE* must be defined. and several Lua instance in different tasks are created then *LUA_MEM_ENTER_CRITICAL_SECTION* and *LUA_MEM_LEAVE_CRITICAL_SECTION* must be defined to protect the memory management calls.
 
 
 ## Embedding lua scripts
