@@ -8,3 +8,14 @@
 *.so
 *.dll
 *.dylib
+MSP430F6747A_FreeRTOS/.settings/org.eclipse.cdt.codan.core.prefs
+MSP430F6747A_FreeRTOS/.settings/org.eclipse.cdt.debug.core.prefs
+MSP430F6747A_FreeRTOS/.settings/org.eclipse.core.resources.prefs
+MSP430F6747A_FreeRTOS/Release/.gitignore
+MSP430F6747A_FreeRTOS/Release/MSP430F6747A_FreeRTOS.map
+MSP430F6747A_FreeRTOS/Release/MSP430F6747A_FreeRTOS.out
+MSP430F6747A_FreeRTOS/Release/MSP430F6747A_FreeRTOS_linkInfo.xml
+MSP430F6747A_FreeRTOS/Release/ccsObjs.opt
+MSP430F6747A_FreeRTOS/Release/main.pp
+MSP430F6747A_FreeRTOS/targetConfigs/MSP430F6747A.ccxml
+MSP430F6747A_FreeRTOS/targetConfigs/readme.txt
