@@ -9,6 +9,7 @@ To run scripts which do something 'meaningful' embLua needs:
 - 13 Heap
 - 1k stack
 - 132k ROM (not optimized code)
+- C-Library
 
 ## Integrating embLua
 To integrate embLua in a custom project:
