@@ -37,5 +37,5 @@ For this purpose embLua/lua/convertToHeader.lua can be used. This script convert
 
 Under embLua/examples/MSP430F6747A_FreeRTOS/luaProject/Scripts a batch file can be found (convertToHeader.bat) which shows the usage of convertToHeader.lua.
 
-**Extending embLua**
+## Extending embLua
 To extend embLua with custom module/functions the define LUA_INTERFACE_LIBS can be used. An example can be found under embLua/examples/MSP430F6747A_FreeRTOS/luaProject/luaInterface.h
