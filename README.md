@@ -18,7 +18,7 @@ To integrate embLua in a custom project:
 
 
 ### luaProjectConfig.h
-This file is used to config  embLua (an example can be found under embLua/examples/MSP430F6747A_FreeRTOS/luaProject). 
+This file is used to configure embLua (an example can be found under embLua/examples/MSP430F6747A_FreeRTOS/luaProject). 
 
 #### Memory management 
 embLua can be configured to use the build in memory management functions (embLua/lua/helper/luaHeap.c) or to use project specific memory functions. To configure the memory management following defines are used:
