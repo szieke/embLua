@@ -8,10 +8,10 @@ The aim of embLua is to provide C/C++ developers the possibility to extend their
 ToDo
 
 
-*luaProjectConfig.h*
+**luaProjectConfig.h**
 ToDo
 
-*Embedding lua scripts*
+**Embedding lua scripts**
 
 
 **Extending embLua**
