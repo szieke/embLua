@@ -4,7 +4,7 @@ The aim of embLua is to provide C/C++ developers the possibility to extend their
 - string module
 - global functions: assert, collectgarbage, error, getmetatable, ipairs, next, pairs, pcall, print, rawequal, rawlen, rawget, rawset, select, setmetatable, tonumber, tostring, type, xpcall
 
-## minimum embLua requirements
+## embLua requirements
 To run scripts which do something 'meaningful' embLua needs:
 - 13 Heap
 - 1k stack
