@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/CPATH/delimiter=;
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/CPATH/operation=remove
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/C_INCLUDE_PATH/delimiter=;
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/C_INCLUDE_PATH/operation=remove
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/append=true
+environment/buildEnvironmentInclude/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/appendContributed=true
+environment/buildEnvironmentLibrary/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/LIBRARY_PATH/delimiter=;
+environment/buildEnvironmentLibrary/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/LIBRARY_PATH/operation=remove
+environment/buildEnvironmentLibrary/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/append=true
+environment/buildEnvironmentLibrary/com.renesas.cdt.rxc.hardwaredebug.win32.configuration.Id.1490148305/appendContributed=true
