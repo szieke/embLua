@@ -8,6 +8,11 @@
 
 #include "stdint.h"
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /*!< Die Groesse des Trace-UART Transmit-Buffer.*/
 #define TRACE_TRANSMIT_BUFFER_SIZE 1024
 
@@ -61,5 +66,9 @@ uint32_t trace_peak(void);
  * \result Die Anzahl der Bytes, die gelesen werden konnten.
  */
 uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize);
+
+#ifdef __cplusplus
+  }
+#endif
 
 #endif

@@ -43,6 +43,11 @@
 #ifndef R_INIT_CLOCK_H
 #define R_INIT_CLOCK_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /*******************************************************************************
 Macro definitions
 *******************************************************************************/
@@ -142,6 +147,10 @@ void CGC_oscillation_PLL(void);
 void CGC_oscillation_HOCO(void);
 void CGC_oscillation_sub(void);
 void CGC_disable_subclk(void);
+
+#ifdef __cplusplus
+  }
+#endif
 
 #endif /* R_INIT_CLOCK_H */
 

@@ -43,6 +43,11 @@
 #ifndef R_INIT_STOP_MODULE_H
 #define R_INIT_STOP_MODULE_H
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 /*******************************************************************************
 Macro definitions
 *******************************************************************************/
@@ -59,6 +64,10 @@ Macro definitions
 Exported global variables and functions (to be accessed by other files)
 *******************************************************************************/
 void R_INIT_StopModule(void);
+
+#ifdef __cplusplus
+  }
+#endif
 
 #endif /* R_INIT_STOP_MODULE_H */
 
