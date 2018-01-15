@@ -5,7 +5,9 @@ The aim of embLua is to provide C/C++ developers the possibility to extend their
 - global functions: assert, collectgarbage, error, getmetatable, ipairs, next, pairs, pcall, print, rawequal, rawlen, rawget, rawset, select, setmetatable, tonumber, tostring, type, xpcall
 
 **Integrating embLua**
-ToDo
+To integrate embLua in a custom project:
+- copy the source files embLua/lua into your project
+- create the embLua config file luaInterface.h (an example can be found under embLua/examplesMSP430F6747A_FreeRTOS/luaProject
 
 
 **luaProjectConfig.h**
