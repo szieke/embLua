@@ -15,6 +15,7 @@ This files is used to config  embLua (an example can be found under embLua/examp
 
 #### Memory management 
 embLua can be configured to use the build in memory management functions (embLua/lua/helper/luaHeap.c) or to use project specific memory functions. 
+
 If the build in memory function shall not be used then the *DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS* must be set.
 In this case *luaMallocFunction* and *luaFreeFunction* must be defined.
 
