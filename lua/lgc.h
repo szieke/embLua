@@ -11,6 +11,10 @@
 #include "lobject.h"
 #include "lstate.h"
 
+#ifdef __cplusplus
+  extern "C" {
+#endif
+
 /*
 ** Collectable objects may have one of three colors: white, which
 ** means the object is not marked; gray, which means the
@@ -143,5 +147,7 @@ LUAI_FUNC void luaC_upvalbarrier_ (lua_State *L, UpVal *uv);
 LUAI_FUNC void luaC_checkfinalizer (lua_State *L, GCObject *o, Table *mt);
 LUAI_FUNC void luaC_upvdeccount (lua_State *L, UpVal *uv);
 
-
+#ifdef __cplusplus
+  }
+#endif
 #endif
