@@ -12,4 +12,5 @@ examples/MSP430F6747A_FreeRTOS/.settings/
 examples/MSP430F6747A_FreeRTOS/targetConfigs/
 examples/MSP430F6747A_FreeRTOS/Debug/
 examples/MSP430F6747A_FreeRTOS/Release/
-examples/RX64M_embOS_Trial_V424/Debug/main.d
+examples/RX64M_embOS_Trial_V424/Debug/
+examples/RX64M_embOS_Trial_V424/Release/
