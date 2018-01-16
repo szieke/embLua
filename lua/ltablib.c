@@ -58,7 +58,7 @@ static void checktab (lua_State *L, int arg, int what) {
 }
 
 
-#if defined(LUA_COMPAT_MAXN)
+
 static int maxn (lua_State *L) {
   lua_Number max = 0;
   luaL_checktype(L, 1, LUA_TTABLE);
@@ -73,7 +73,7 @@ static int maxn (lua_State *L) {
   lua_pushnumber(L, max);
   return 1;
 }
-#endif
+
 
 
 static int tinsert (lua_State *L) {
@@ -443,6 +443,7 @@ static int sort (lua_State *L) {
 
 static const luaL_Reg tab_funcs[] = {
   {"concat", tconcat},
+  {"maxn", maxn},
   {"insert", tinsert},
   {"pack", pack},
   {"unpack", unpack},
@@ -455,11 +456,9 @@ static const luaL_Reg tab_funcs[] = {
 
 LUAMOD_API int luaopen_table (lua_State *L) {
   luaL_newlib(L, tab_funcs);
-#if defined(LUA_COMPAT_UNPACK)
   /* _G.unpack = table.unpack */
   lua_getfield(L, -1, "unpack");
   lua_setglobal(L, "unpack");
-#endif
   return 1;
 }
 

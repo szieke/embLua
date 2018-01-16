@@ -32,10 +32,10 @@ function convertFile(fileName)
 	newFileName = newFileName  .. '.h'
 	
 	--Remove all multi line comments (--[[     --]])
-	content = string.gsub(content, '[\t ]*%-%-%[%[(.-)%-%-%]%]', '')
+	content = string.gsub(content, '[^"\']%-%-%[%[(.-)%-%-%]%]', '')
 		
 	--Remove all single line comments (--)
-	content = string.gsub(content, '[\t ]*%-%-(.-)[\r\n]', '')
+	content = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
 	
 	content = string.gsub(content, '\\', '\\\\')
 	content = string.gsub(content, '"', '\\"')
@@ -47,7 +47,9 @@ function convertFile(fileName)
 	newContent = string.sub(newContent, 0, string.len(newContent) - 4) .. '";'
 	
 	--Remove all empty lines.
-	newContent = string.gsub(newContent, '\"[\t ]*\\n\"[\r\n]', '')
+	newContent = string.gsub(newContent, '[\t ]+\\n\\', '\\n\\')
+	newContent = string.gsub(newContent, '[\r\n]\\n\\[\r\n]', '\n')
+	newContent = string.gsub(newContent, '\\n\\[\r\n]\\n\\', '\\n\\')
 	
 	--Remove Space and tabs in front of code.
 	newContent = string.gsub(newContent, '\"[\t ]*', '\"')

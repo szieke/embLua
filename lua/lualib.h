@@ -27,12 +27,8 @@ LUAMOD_API int (luaopen_table) (lua_State *L);
 #define LUA_STRLIBNAME	"string"
 LUAMOD_API int (luaopen_string) (lua_State *L);
 
-#define LUA_BITLIBNAME	"bit32"
-LUAMOD_API int (luaopen_bit32) (lua_State *L);
-
-#define LUA_MATHLIBNAME	"math"
-LUAMOD_API int (luaopen_math) (lua_State *L);
-
+#define LUA_DBLIBNAME "debug"
+LUAMOD_API int (luaopen_debug) (lua_State *L);
 
 /* open all previous libraries */
 LUALIB_API void (luaL_openlibs) (lua_State *L);
