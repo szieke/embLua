@@ -191,6 +191,7 @@
 								<option id="com.renesas.cdt.renesas.Compiler.option.deviceShortName.1238859303" name="DeviceShortName" superClass="com.renesas.cdt.renesas.Compiler.option.deviceShortName" value="R5F564MLCxFC" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.renesas.Compiler.option.incFileDirectories.1170930489" name="Include file directories" superClass="com.renesas.cdt.renesas.Compiler.option.incFileDirectories" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/luaProject}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/luaProject/Scripts}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\embLua\lua&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\embLua\lua\helper&quot;"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>r01an1918_rx64m</name>
+	<name>RX64M</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -26,309 +26,315 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>lua</name>
+			<name>src/lua</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>lua/helper</name>
+			<name>src/lua/helper</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>lua/lapi.c</name>
+			<name>src/lua/lapi.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lapi.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lapi.h</name>
+			<name>src/lua/lapi.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lapi.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lauxlib.c</name>
+			<name>src/lua/lauxlib.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lauxlib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lauxlib.h</name>
+			<name>src/lua/lauxlib.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lauxlib.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lbaselib.c</name>
+			<name>src/lua/lbaselib.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lbaselib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lbitlib.c</name>
+			<name>src/lua/lbitlib.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lbitlib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lcode.c</name>
+			<name>src/lua/lcode.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lcode.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lcode.h</name>
+			<name>src/lua/lcode.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lcode.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lctype.c</name>
+			<name>src/lua/lctype.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lctype.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lctype.h</name>
+			<name>src/lua/lctype.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lctype.h</locationURI>
 		</link>
 		<link>
-			<name>lua/ldebug.c</name>
+			<name>src/lua/ldebug.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldebug.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ldebug.h</name>
+			<name>src/lua/ldebug.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldebug.h</locationURI>
 		</link>
 		<link>
-			<name>lua/ldo.c</name>
+			<name>src/lua/ldo.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldo.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ldo.h</name>
+			<name>src/lua/ldo.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldo.h</locationURI>
 		</link>
 		<link>
-			<name>lua/ldump.c</name>
+			<name>src/lua/ldump.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldump.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lfunc.c</name>
+			<name>src/lua/lfunc.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lfunc.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lfunc.h</name>
+			<name>src/lua/lfunc.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lfunc.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lgc.c</name>
+			<name>src/lua/lgc.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lgc.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lgc.h</name>
+			<name>src/lua/lgc.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lgc.h</locationURI>
 		</link>
 		<link>
-			<name>lua/linit.c</name>
+			<name>src/lua/linit.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/linit.c</locationURI>
 		</link>
 		<link>
-			<name>lua/llex.c</name>
+			<name>src/lua/llex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/llex.c</locationURI>
 		</link>
 		<link>
-			<name>lua/llex.h</name>
+			<name>src/lua/llex.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/llex.h</locationURI>
 		</link>
 		<link>
-			<name>lua/llimits.h</name>
+			<name>src/lua/llimits.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/llimits.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lmem.c</name>
+			<name>src/lua/lmem.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lmem.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lmem.h</name>
+			<name>src/lua/lmem.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lmem.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lobject.c</name>
+			<name>src/lua/lobject.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lobject.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lobject.h</name>
+			<name>src/lua/lobject.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lobject.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lopcodes.c</name>
+			<name>src/lua/lopcodes.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lopcodes.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lopcodes.h</name>
+			<name>src/lua/lopcodes.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lopcodes.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lparser.c</name>
+			<name>src/lua/lparser.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lparser.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lparser.h</name>
+			<name>src/lua/lparser.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lparser.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lprefix.h</name>
+			<name>src/lua/lprefix.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lprefix.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lstate.c</name>
+			<name>src/lua/lstate.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lstate.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lstate.h</name>
+			<name>src/lua/lstate.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lstate.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lstring.c</name>
+			<name>src/lua/lstring.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lstring.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lstring.h</name>
+			<name>src/lua/lstring.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lstring.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lstrlib.c</name>
+			<name>src/lua/lstrlib.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lstrlib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ltable.c</name>
+			<name>src/lua/ltable.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ltable.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ltable.h</name>
+			<name>src/lua/ltable.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ltable.h</locationURI>
 		</link>
 		<link>
-			<name>lua/ltablib.c</name>
+			<name>src/lua/ltablib.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ltablib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ltm.c</name>
+			<name>src/lua/ltm.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ltm.c</locationURI>
 		</link>
 		<link>
-			<name>lua/ltm.h</name>
+			<name>src/lua/ltm.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ltm.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lua.h</name>
+			<name>src/lua/lua.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lua.h</locationURI>
 		</link>
 		<link>
-			<name>lua/luaconf.h</name>
+			<name>src/lua/luaconf.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/luaconf.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lualib.h</name>
+			<name>src/lua/lualib.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lualib.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lundump.c</name>
+			<name>src/lua/lundump.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lundump.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lundump.h</name>
+			<name>src/lua/lundump.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lundump.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lvm.c</name>
+			<name>src/lua/lvm.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lvm.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lvm.h</name>
+			<name>src/lua/lvm.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lvm.h</locationURI>
 		</link>
 		<link>
-			<name>lua/lzio.c</name>
+			<name>src/lua/lzio.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lzio.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lzio.h</name>
+			<name>src/lua/lzio.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lzio.h</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/convertToHeader.lua</name>
+			<name>src/lua/helper/convertToHeader.lua</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/convertToHeader.lua</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/lua-5.2.4_Win32_bin</name>
+			<name>src/lua/helper/lua-5.2.4_Win32_bin</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/luaHeap.c</name>
+			<name>src/lua/helper/luaHeap.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHeap.c</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/luaHeap.h</name>
+			<name>src/lua/helper/luaHeap.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHeap.h</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/luaHelper.c</name>
+			<name>src/lua/helper/luaHelper.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHelper.c</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/luaHelper.h</name>
+			<name>src/lua/helper/luaHelper.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHelper.h</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/lua-5.2.4_Win32_bin/lua52.dll</name>
+			<name>src/lua/helper/lua-5.2.4_Win32_bin/lua52.dll</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/lua-5.2.4_Win32_bin/lua52.dll</locationURI>
 		</link>
 		<link>
-			<name>lua/helper/lua-5.2.4_Win32_bin/lua52.exe</name>
+			<name>src/lua/helper/lua-5.2.4_Win32_bin/lua52.exe</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/lua-5.2.4_Win32_bin/lua52.exe</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>copy_PARENT</name>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D/embLua</value>
+		</variable>
+	</variableList>
 </projectDescription>

@@ -21,7 +21,7 @@ typedef struct
     uint16_t receiveTail; /*!< The tail of the receive buffer.*/
     uint16_t transmitHead; /*!< The head of the transmit buffer.*/
     uint16_t transmitTail; /*!< The tail of the transmit buffer.*/
-    uint16_t bytesInTransmitBuffer; /*!< The number of byte in the trasmit buffer.*/
+    uint16_t bytesInTransmitBuffer; /*!< The number of byte in the transmit buffer.*/
     uint16_t uart; /*!< UART address.*/
     uint16_t port;/*!< UART port.*/
     uint16_t txPin; /*!< UART Tx pin.*/
