@@ -33,5 +33,4 @@ end
 
 for loopCounter=0,2 do 
 	print(pcall(script1Function), '\n')
-	uc.taskDelay(1)
 end
