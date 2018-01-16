@@ -35,7 +35,13 @@ function convertFile(fileName)
 	content = string.gsub(content, '[^"\']%-%-%[%[(.-)%-%-%]%]', '')
 		
 	--Remove all single line comments (--)
-	content = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
+	local tmpString = content
+	repeat
+		content = tmpString
+		tmpString = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
+	until(tmpString == content)
+
+	--content = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
 	
 	content = string.gsub(content, '\\', '\\\\')
 	content = string.gsub(content, '"', '\\"')

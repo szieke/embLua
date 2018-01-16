@@ -20,6 +20,9 @@
 #include "printFreeHeap.h"
 #include "calls.h"
 #include "closure.h"
+#include "constructs.h"
+#include "errors.h"
+#include "events.h"
 
 void main(void);
 
@@ -45,8 +48,6 @@ void main(void)
 
   setpsw_i();
 
-
-
   lua_State *L = luaL_newstate(); /* create state */
   if (L == NULL)
   {
@@ -56,7 +57,7 @@ void main(void)
   }
   else
   {
-    luaL_openlibs(L); /* open standard libraries */
+
 
     char buffer[32];
     uint32_t counter = 0;
@@ -64,11 +65,16 @@ void main(void)
     while (1)
     {
 
+      lua_State *L = luaL_newstate(); /* create state */
+
+      luaL_openlibs(L); /* open standard libraries */
+
       lua_writestringWithoutsize("\nStart: ");
       sprintf(buffer, "%i", counter++);
       lua_writestringWithoutsize(buffer);
       lua_writeline();
 
+      /**********************calls.lua************************************************/
       if (dostring(L, calls, "calls") != LUA_OK)
       {
         while (1)
@@ -77,6 +83,8 @@ void main(void)
       lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
       lua_writeline();
 
+      /**********************closure.lua************************************************/
+
       if (dostring(L, closure, "closure") != LUA_OK)
       {
         while (1)
@@ -84,6 +92,39 @@ void main(void)
       }
       lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
       lua_writeline();
+
+      /**********************constructs.lua************************************************/
+
+      if (dostring(L, constructs, "constructs") != LUA_OK)
+      {
+        while (1)
+          ;
+      }
+      lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
+
+      /**********************errors.lua************************************************/
+
+      if (dostring(L, errors, "errors") != LUA_OK)
+      {
+        while (1)
+          ;
+      }
+      lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
+
+
+
+      /**********************events.lua************************************************/
+
+      if (dostring(L, events, "events") != LUA_OK)
+      {
+        while (1)
+          ;
+      }
+      lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
+
     }
   }
 }
