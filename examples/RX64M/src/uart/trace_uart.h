@@ -25,9 +25,15 @@ typedef unsigned char bool_t;
 #define FALSE 0
 #endif
 
+#define TRACE_RECEIVE_EVENT 0x10000000
+
 void trace_initializeUart();
+
 uint32_t trace_write(const uint8_t buffer[], const uint32_t bufferSize, bool_t waitUntilAllBytesAreInBuffer);
+
+
 uint32_t trace_peak(void);
+
 uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize);
 
 #ifdef __cplusplus

@@ -1,7 +1,4 @@
-
 #include "trace_uart.h"
-#include "iodefine.h"
-
 
 typedef struct
 {
@@ -22,46 +19,87 @@ typedef struct
 
 static trace_uartData_t g_uartData;
 
-#define UART_INT_PRIO     (0x01u)     // Lowest priority
-#define BAUDRATE (115200u)
-#define FSYS 120000000u        /* Assume 120MHz*/
-#define PCLK_UART  (FSYS/2u)
-#define BAUDDIVIDE (((PCLK_UART + (BAUDRATE * 16u)) / (BAUDRATE * 32u)) - 1u)
+#define EVENACCESS             __evenaccess
+#define IER0C                (*(volatile EVENACCESS uint8_t*)  (0x0008720Cu))
+#define SCI7_BASE_ADDR       (0x0008A0E0u)
+#define UART_BASE_ADDR  (SCI7_BASE_ADDR)
+#define UART_TDR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x03u))
+#define UART_IER_RX     (IER0C)
+#define UART_IER_TX     (IER0C)
+#define UART_IER_RX_BIT (2u)
+#define UART_IER_TX_BIT (3u)
 
+/****** Protect register  ********************************************/
+#define PRCR                 (*(volatile EVENACCESS uint16_t*) (0x000803FEu))
+
+/****** Interrupt controller       **********************************/
+#define IRR_BASE_ADDR        (0x00087000u)
+
+#define IER0C                (*(volatile EVENACCESS uint8_t*)  (0x0008720Cu))
+#define IPR98                (*(volatile EVENACCESS uint8_t*)  (0x00087362u))
+#define IPR99                (*(volatile EVENACCESS uint8_t*)  (0x00087363u))
+
+/****** SYSTEM module  **********************************************/
+#define SYSTEM_BASE_ADDR     (0x00080000u)
+#define MSTPCRB              (*(volatile EVENACCESS uint32_t*) (SYSTEM_BASE_ADDR + 0x014u))
+
+#define SCI7_BASE_ADDR       (0x0008A0E0u)
+
+#define PWPR                 (*(volatile EVENACCESS uint8_t*)(0x0008C11Fu))
+#define P90PFS               (*(volatile EVENACCESS uint8_t*)(0x0008C188u))
+#define P92PFS               (*(volatile EVENACCESS uint8_t*)(0x0008C18Au))
+#define P9PMR                (*(volatile EVENACCESS uint8_t*)(0x0008C069u))
+
+#define UART_MSTPCR     (MSTPCRB)
+#define UART_MSTPCR_BIT (24u)
+#define UART_BASE_ADDR  (SCI7_BASE_ADDR)
+#define UART_IPR_RX     (IPR98)
+#define UART_IPR_TX     (IPR99)
+#define UART_IER_RX     (IER0C)
+#define UART_IER_TX     (IER0C)
+#define UART_IER_RX_BIT (2u)
+#define UART_IER_TX_BIT (3u)
 #define UART_RX_VECT     98u
 #define UART_TX_VECT     99u
 
-void trace_txInterrupt(void)
-{
-  if (g_uartData.sendingActive)
-  {
-    g_uartData.bytesInTransmitBuffer--;
+#define UART_INT_PRIO     (0x01u)     // Lowest priority
 
-    if (g_uartData.bytesInTransmitBuffer != 0)
-    {
-      SCI7.TDR = g_uartData.transmit[g_uartData.transmitTail];
+#define UART_SMR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x00u))
+#define UART_BRR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x01u))
+#define UART_SCR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x02u))
+#define UART_TDR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x03u))
+#define UART_SSR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x04u))
+#define UART_RDR          (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x05u))
+#define UART_SCMR         (*(volatile EVENACCESS uint8_t*) (UART_BASE_ADDR + 0x06u))
 
-      g_uartData.transmitTail++;
-      if (g_uartData.transmitTail >= g_uartData.transmitSize)
-      {
-        g_uartData.transmitTail = 0U;
-      }
-    }
-    else
-    {
-      g_uartData.sendingActive = FALSE;
-    }
-  }
-}
+#define UART_ERR_PER_BIT     (3u)
+#define UART_ERR_FER_BIT     (4u)
+#define UART_ERR_ORER_BIT    (5u)
+#define UART_ERR_PER_MASK    (1u << UART_ERR_PER_BIT)
+#define UART_ERR_FER_MASK    (1u << UART_ERR_FER_BIT)
+#define UART_ERR_ORER_MASK   (1u << UART_ERR_ORER_BIT)
+#define UART_ERR_MASK_ALL    (UART_ERR_PER_MASK | UART_ERR_FER_MASK | UART_ERR_ORER_MASK)
+
+#ifndef   BAUDRATE
+#define BAUDRATE (115200u)
+#endif
+#define FSYS 120000000u        /* Assume 120MHz*/
+
+#ifndef   PCLK_UART
+#define PCLK_UART  (FSYS/2u)
+#endif
+
+#define BAUDDIVIDE (((PCLK_UART + (BAUDRATE * 16u)) / (BAUDRATE * 32u)) - 1u)
+
+/****************************************************************************************/
 
 #pragma interrupt (_ISR_Rx(vect=UART_RX_VECT)) // Rx data interrupt
 static void _ISR_Rx(void)
 {
-
   if (g_uartData.bytesInReceiveBuffer != g_uartData.receiveSize)
-  {/*Receive buffer is not full.*/
+  {/*The receive buffer is not full.*/
 
-    g_uartData.receive[g_uartData.receiveHead] = SCI7.RDR;
+    g_uartData.receive[g_uartData.receiveHead] = UART_RDR;
     g_uartData.bytesInReceiveBuffer++;
 
     g_uartData.receiveHead++;
@@ -71,7 +109,7 @@ static void _ISR_Rx(void)
     }
 
     if (g_uartData.bytesInReceiveBuffer == g_uartData.receiveSize)
-    {/*Receive buffer is full.*/
+    {/*The receive buffer is not full*/
     }
   }
 
@@ -86,7 +124,7 @@ static void _ISR_Tx(void)
 
     if (g_uartData.bytesInTransmitBuffer != 0)
     {
-      SCI7.TDR = g_uartData.transmit[g_uartData.transmitTail];
+      UART_TDR = g_uartData.transmit[g_uartData.transmitTail];
 
       g_uartData.transmitTail++;
       if (g_uartData.transmitTail >= g_uartData.transmitSize)
@@ -101,10 +139,94 @@ static void _ISR_Tx(void)
   }
 }
 
+void trace_initializeUart()
+{
+
+  g_uartData.receiveSize = TRACE_RECEIVE_BUFFER_SIZE;
+  g_uartData.transmitSize = TRACE_TRANSMIT_BUFFER_SIZE;
+  g_uartData.receiveTail = 0U;
+  g_uartData.receiveHead = 0U;
+  g_uartData.transmitTail = 0U;
+  g_uartData.transmitHead = 0U;
+  g_uartData.bytesInReceiveBuffer = 0;
+  g_uartData.bytesInTransmitBuffer = 0;
+  g_uartData.sendingActive = FALSE;
+
+  PRCR = 0xA50Bu; // Protect off
+
+  volatile unsigned int i;
+  //
+  // Enable UART Module
+  //
+  UART_MSTPCR &= ~(1u << UART_MSTPCR_BIT);
+  //
+  // Set uart port pins
+  //
+  PWPR = 0x00u; // Disable write protect
+  PWPR = 0x40u; // Enable write access
+  P90PFS = 0x0Au; // Set pin function register to uart function
+  P92PFS = 0x0Au; // Set pin function register to uart function
+  PWPR = 0x80u; // Enable write protect
+  P9PMR |= 0x05u; // Set pin to peripheral function
+  //
+  // Reset, disable Reception and transmission
+  //
+  UART_SCR = 0x00u;
+  //
+  // Set transmission mode
+  //
+  UART_SMR = 0x00u;
+  //
+  // Set transfer direction, LSB first, 8 bit data length
+  //
+  UART_SCMR = 0x10u;
+  //
+  // Set baudrate
+  //
+  UART_BRR = (uint8_t) (BAUDDIVIDE);
+  //
+  // Wait for SCI Settling time (1 bit cycle)
+  //
+  for (i = 0u; i < 3000u; i++)
+  {
+  }
+  //
+  // Clear status
+  //
+  UART_SSR = 0x00u;
+  //
+  // Setup interrupt control register for UART
+  //
+  UART_IPR_RX = UART_INT_PRIO; // Lowest priority
+  UART_IPR_TX = UART_INT_PRIO; // Lowest priority
+  //
+  // Enable UART interrupts
+  //
+  UART_IER_RX |= (1u << UART_IER_RX_BIT); // Enable Rx interrupt
+  UART_IER_TX |= (1u << UART_IER_TX_BIT); // Enable Tx empty interrupt
+  //
+  // Clear interrupt request flags
+  //
+  *(uint8_t*) (IRR_BASE_ADDR + UART_RX_VECT) = 0u;
+  *(uint8_t*) (IRR_BASE_ADDR + UART_TX_VECT) = 0u;
+  //
+  // Finally enable Rx and Tx interrupts and enable uart Rx and Tx
+  //
+  UART_SCR |= (1u << 7u) // Tx interrupt enable
+  | (1u << 6u); // Rx interrupt enable
+  UART_SCR |= (1u << 5u) // Tx enable
+  | (1u << 4u); // Rx enable
+
+  PRCR = 0xA500u; // Protect on
+
+}
+
+
 static uint32_t trace_writePossible(void)
 {
   return g_uartData.transmitSize - g_uartData.bytesInTransmitBuffer;
 }
+
 
 static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t bufferSize)
 {
@@ -125,11 +247,13 @@ static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t buffe
   if (writtenBytes != 0U)
   {
 
-    IEN( SCI7, TXI7 )= 0;
+    /*Disable TXE interrupt*/
+    UART_IER_TX &= ~(1u << UART_IER_TX_BIT);
 
     if (!g_uartData.sendingActive)
     {
-      SCI7.TDR = buffer[0];
+
+      UART_TDR = buffer[0];
       bufferIndex = 1;
       g_uartData.sendingActive = TRUE;
 
@@ -149,7 +273,8 @@ static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t buffe
 
     g_uartData.bytesInTransmitBuffer += writtenBytes;
 
-    IEN( SCI7, TXI7 ) = 1;
+    /*Enable TXE interrupt*/
+    UART_IER_TX |= (1u << UART_IER_TX_BIT);
 
   }/*if (writtenBytes != 0U)*/
 
@@ -181,83 +306,11 @@ uint32_t trace_write(const uint8_t buffer[], const uint32_t bufferSize, bool_t w
   return bytesSend;
 }
 
-void trace_initializeUart()
-{
-
-  g_uartData.receiveSize = TRACE_RECEIVE_BUFFER_SIZE;
-  g_uartData.transmitSize = TRACE_TRANSMIT_BUFFER_SIZE;
-  g_uartData.receiveTail = 0U;
-  g_uartData.receiveHead = 0U;
-  g_uartData.transmitTail = 0U;
-  g_uartData.transmitHead = 0U;
-  g_uartData.bytesInReceiveBuffer = 0;
-  g_uartData.bytesInTransmitBuffer = 0;
-  g_uartData.sendingActive = FALSE;
-
-  SYSTEM.PRCR.WORD = 0xA50Bu; // Protect off
-
-  volatile unsigned int i;
-
-  // Enable UART Module
-  SYSTEM.MSTPCRB.BIT.MSTPB24 = 0;
-
-  MPC.PWPR.BYTE = 0x00u; // Disable write protect
-  MPC.PWPR.BYTE = 0x40u; // Enable write access
-
-  MPC.P90PFS.BYTE = 0x0Au; // Set pin function register to uart function
-  MPC.P92PFS.BYTE = 0x0Au; // Set pin function register to uart function
-  MPC.PWPR.BYTE = 0x80u; // Enable write protect
-  PORT9.PMR.BYTE |= 0x05u; // Set pin to peripheral function
-
-  // Reset, disable Reception and transmission
-  SCI7.SCR.BYTE = 0x00u;
-
-  // Set transmission mode
-  SCI7.SMR.BYTE = 0x00u;
-
-  // Set transfer direction, LSB first, 8 bit data length
-  SCI7.SCMR.BYTE = 0x10u;
-
-  // Set baudrate
-  SCI7.BRR = (uint32_t) (BAUDDIVIDE);
-  //
-  // Wait for SCI Settling time (1 bit cycle)
-  //
-  for (i = 0u; i < 3000u; i++)
-  {
-  }
-
-  // Clear status
-  SCI7.SSR.BYTE = 0x00u;
-
-  /* Set interrupt priority */
-  IPR( SCI7, RXI7 )= UART_INT_PRIO;
-  IPR( SCI7, TXI7 )= UART_INT_PRIO;
-
-  /* Clear interrupt flag */
-  IR( SCI7, RXI7 )= 0;
-  IR( SCI7, TXI7 )= 0;
-
-  /* Enable SCI7 interrupt */
-  IEN( SCI7, RXI7 )= 1;
-  IEN( SCI7, TXI7 )= 1;
-
-  //
-  // Finally enable Rx and Tx interrupts and enable uart Rx and Tx
-  //
-  SCI7.SCR.BIT.TIE = 1; // Tx interrupt enable
-  SCI7.SCR.BIT.RIE = 1; // Rx interrupt enable
-  SCI7.SCR.BIT.TE = 1; // Tx enable
-  SCI7.SCR.BIT.RE = 1; // Rx enable
-
-  SYSTEM.PRCR.WORD = 0xA500u; // Protect on
-
-}
-
 uint32_t trace_peak(void)
 {
   return g_uartData.bytesInReceiveBuffer;
 }
+
 
 uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize)
 {
@@ -272,7 +325,8 @@ uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize)
     read_bytes = g_uartData.bytesInReceiveBuffer;
   }
 
-  IEN( SCI7, RXI7 )= 0;
+  /*Disable RXE interrupt*/
+  UART_IER_RX &= ~(1u << UART_IER_RX_BIT);
 
   if (0U != read_bytes)
   {
@@ -291,7 +345,8 @@ uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize)
 
   }
 
-  IEN( SCI7, RXI7 )= 1;
+  /*Enable RXE interrupt*/
+  UART_IER_RX |= (1u << UART_IER_RX_BIT);
 
   return read_bytes;
 }
