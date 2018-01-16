@@ -32,7 +32,7 @@
 #ifndef DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS
 /*The lua heap (luaHeap.c) functions shall be used.*/
 
-#include "luaHeap.h"
+#include "helper/luaHeap.h"
 
 #define luaMallocFunction(xWantedSize) luaMalloc(xWantedSize)
 #define luaFreeFunction(pv) luaFree(pv)

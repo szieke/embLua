@@ -5,7 +5,7 @@
 
 
 #include <stdlib.h>
-#include "luaconf.h"
+#include "../luaconf.h"
 #include "luaHeap.h"
 
 #ifndef DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS

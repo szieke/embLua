@@ -3,7 +3,7 @@
 #ifndef LUAINTERFACE_H_
 #define LUAINTERFACE_H_
 
-#include "../../../../lua/lua.h"
+#include "../../../lua.h"
 
 //
 #define LUA_INTERFACE_LIBS {"uc", luaopen_uc}

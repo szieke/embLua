@@ -1,8 +1,8 @@
 
-#include <helper/luaHelper.h>
-#include "lua.h"
-#include "lauxlib.h"
-#include "lualib.h"
+#include "luaHelper.h"
+#include "../lua.h"
+#include "../lauxlib.h"
+#include "../lualib.h"
 
 #include <string.h>
 

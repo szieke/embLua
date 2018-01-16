@@ -1,4 +1,3 @@
-
 #include <machine.h>
 #include <stdint.h>
 #include "iodefine.h"
@@ -9,26 +8,25 @@
 
 #define lua_c
 
-#include "../../../lua/lprefix.h"
+#include "../../lprefix.h"
 #include <string.h>
 
-#include "../../../lua/lua.h"
-#include "../../../lua/lauxlib.h"
-#include "../../../lua/lualib.h"
+#include "../../lua.h"
+#include "../../lauxlib.h"
+#include "../../lualib.h"
 
-#include "../../../lua/helper/luaHelper.h"
+#include "../../helper/luaHelper.h"
 
-#include "script1.h"
-#include "script2.h"
-#include "helperScript.h"
+
 #include "printFreeHeap.h"
+#include "calls.h"
 
 void main(void);
 
 #ifdef __cplusplus
 extern "C"
 {
-  void abort(void);
+void abort(void);
 }
 #endif
 
@@ -59,38 +57,21 @@ void main(void)
   else
   {
     luaL_openlibs(L); /* open standard libraries */
-    
-    if (dostring(L, helperScript, "helperScript") != LUA_OK)
-    {
-      while (1)
-      {
-      };
-    }
+
 
     while (1)
     {
 
-      if (dostring(L, script1, "script1") != LUA_OK)
-      {
-        while (1)
-          ;
-      }
+      if (dostring(L, calls, "calls") != LUA_OK)
+         {
+           while (1)
+             ;
+         }
 
       lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
 
-      lua_writeline();
-
-      if (dostring(L, script2, "script2") != LUA_OK)
-      {
-        while (1)
-          ;
-      }
-
-      lua_writeline();
-      printMinimumFreeHeap();
-
-      lua_writestringWithoutsize("\n****************************************************************************\n");
-
+      lua_writeline()
+      ;
     }
   }
 }

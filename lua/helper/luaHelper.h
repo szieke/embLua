@@ -4,7 +4,7 @@
 #define LUAHELPER_H_
 
 
-#include "lua.h"
+#include "../../../lua/lua.h"
 
 #ifdef __cplusplus
   extern "C" {
