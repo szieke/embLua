@@ -5,7 +5,6 @@
 
 
 #include <stdlib.h>
-//#include "global.h"
 #include "luaconf.h"
 #include "luaHeap.h"
 

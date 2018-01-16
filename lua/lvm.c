@@ -251,7 +251,7 @@ static int l_strcmp (const TString *ls, const TString *rs) {
   const char *r = getstr(rs);
   size_t lr = tsslen(rs);
   for (;;) {  /* for each segment */
-//    int temp = strcoll(l, r);
+/*    int temp = strcoll(l, r);*/
     int temp = strcmp(l, r);
     if (temp != 0)  /* not equal? */
       return temp;  /* done */

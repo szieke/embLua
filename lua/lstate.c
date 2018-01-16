@@ -53,7 +53,7 @@ static int32_t randtbl[31] =
 ** created; the seed is used to randomize hashes.
 */
 #if !defined(luai_makeseed)
-//#include <time.h>
+/*#include <time.h>*/
 #define luai_makeseed()		cast(unsigned int, randtbl[randomTableIndex++])
 #endif
 
@@ -92,10 +92,11 @@ static unsigned int makeseed (lua_State *L) {
   char buff[4 * sizeof(size_t)];
   unsigned int h = luai_makeseed();
   int p = 0;
+   
   addbuff(buff, p, L);  /* heap variable */
   addbuff(buff, p, &h);  /* local variable */
   addbuff(buff, p, luaO_nilobject);  /* global variable */
-  addbuff(buff, p, &lua_newstate);  /* public function */
+  addbuff(buff, p, (void*)((luaPointerSize_t)&lua_newstate));  /* public function */
   lua_assert(p == sizeof(buff));
   return luaS_hash(buff, p, h);
 }

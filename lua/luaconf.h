@@ -11,7 +11,7 @@
 #include <limits.h>
 #include <stddef.h>
 #include <stdint.h>
-
+#include <stdio.h>
 #include "luaProjectConfig.h"
 /*
 ** ===================================================================
@@ -30,7 +30,7 @@
 
 
 #ifndef DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS
-//The lua heap (luaHeap.c) functions shall be used.
+/*The lua heap (luaHeap.c) functions shall be used.*/
 
 #include "luaHeap.h"
 
@@ -47,7 +47,7 @@
 
 #endif
 
-extern void luaAbort();
+extern void luaAbort(void);
 
 
 
@@ -71,7 +71,7 @@ extern void luaAbort();
 ** Define it if you want Lua to avoid the use of a few C99 features
 ** or Windows-specific features on Windows.
 */
-//#define LUA_USE_C89
+/*#define LUA_USE_C89*/
 
 
 /*
@@ -700,7 +700,7 @@ extern void luaAbort();
 ** macro must include header 'locale.h'.)
 */
 #if !defined(lua_getlocaledecpoint)
-#define lua_getlocaledecpoint()		'.' //(localeconv()->decimal_point[0])
+#define lua_getlocaledecpoint()		'.' /*(localeconv()->decimal_point[0])*/
 #endif
 
 /* }================================================================== */
