@@ -200,5 +200,5 @@ assert(a()(2)(3)(10) == 15)\n\
 assert((function () return nil end)(4) == nil)\n\
 assert((function () local a; return a end)(4) == nil)\n\
 assert((function (a) return a end)() == nil)\n\
-print('OK')\n\
+print('  OK')\n\
 return deep";

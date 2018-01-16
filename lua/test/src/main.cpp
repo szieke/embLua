@@ -17,9 +17,9 @@
 
 #include "../../helper/luaHelper.h"
 
-
 #include "printFreeHeap.h"
 #include "calls.h"
+#include "closure.h"
 
 void main(void);
 
@@ -45,7 +45,7 @@ void main(void)
 
   setpsw_i();
 
-  lua_writestringWithoutsize("Start\n");
+
 
   lua_State *L = luaL_newstate(); /* create state */
   if (L == NULL)
@@ -58,20 +58,32 @@ void main(void)
   {
     luaL_openlibs(L); /* open standard libraries */
 
+    char buffer[32];
+    uint32_t counter = 0;
 
     while (1)
     {
 
+      lua_writestringWithoutsize("\nStart: ");
+      sprintf(buffer, "%i", counter++);
+      lua_writestringWithoutsize(buffer);
+      lua_writeline();
+
       if (dostring(L, calls, "calls") != LUA_OK)
-         {
-           while (1)
-             ;
-         }
-
+      {
+        while (1)
+          ;
+      }
       lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
 
-      lua_writeline()
-      ;
+      if (dostring(L, closure, "closure") != LUA_OK)
+      {
+        while (1)
+          ;
+      }
+      lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
     }
   }
 }
