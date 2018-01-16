@@ -62,12 +62,10 @@ void main(void)
     char buffer[32];
     uint32_t counter = 0;
 
+    luaL_openlibs(L); /* open standard libraries */
+
     while (1)
     {
-
-      lua_State *L = luaL_newstate(); /* create state */
-
-      luaL_openlibs(L); /* open standard libraries */
 
       lua_writestringWithoutsize("\nStart: ");
       sprintf(buffer, "%i", counter++);
@@ -123,6 +121,12 @@ void main(void)
           ;
       }
       lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      lua_writeline();
+
+
+
+
+      printMinimumFreeHeap();
       lua_writeline();
 
     }

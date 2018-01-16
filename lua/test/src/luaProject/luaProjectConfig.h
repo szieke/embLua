@@ -4,7 +4,7 @@
 
 
 
-#define LUA_HEAP_SIZE (300000)
+#define LUA_HEAP_SIZE (400000)
 
 
 
