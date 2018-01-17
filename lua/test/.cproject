@@ -233,7 +233,7 @@
 								</option>
 								<option id="com.renesas.cdt.renesas.Compiler.option.C.474479700" name="C :" superClass="com.renesas.cdt.renesas.Compiler.option.C" value="C99" valueType="enumerated"/>
 								<option id="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizeLevel.1837945850" name="Optimize level" superClass="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizeLevel" value="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizeLevel.2" valueType="enumerated"/>
-								<option id="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType.1251530082" name="Optimization type" superClass="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType" value="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType.speed" valueType="enumerated"/>
+								<option id="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType.1251530082" name="Optimization type" superClass="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType" value="com.renesas.cdt.rxc.HardwareDebug.Compiler.option.optimizationType.size" valueType="enumerated"/>
 								<inputType id="%Base.Compiler.Shc.C.Input.Id.2054540726" name="C Input" superClass="%Base.Compiler.Shc.C.Input.Id"/>
 								<inputType id="%Base.Compiler.Shc.C.Input1.Id.1860670250" name="C++ Input" superClass="%Base.Compiler.Shc.C.Input1.Id"/>
 							</tool>
@@ -278,7 +278,7 @@
 									<listOptionValue builtIn="false" value="../r01an1918_rx64m/r01an1918_rx64m/r01an1918_src/luaProject/Scripts"/>
 									<listOptionValue builtIn="false" value="../r01an1918_rx64m/r01an1918_rx64m/r01an1918_src/uart"/>
 								</option>
-								<option id="com.renesas.cdt.rxc.HardwareDebug.Assembler.option.DebugInformation.1504215587" superClass="com.renesas.cdt.rxc.HardwareDebug.Assembler.option.DebugInformation" value="false" valueType="boolean"/>
+								<option id="com.renesas.cdt.rxc.HardwareDebug.Assembler.option.DebugInformation.1504215587" name="Generate debug information" superClass="com.renesas.cdt.rxc.HardwareDebug.Assembler.option.DebugInformation" value="false" valueType="boolean"/>
 								<inputType id="%Base.Assembler.shcInputType.Id.1144734768" name="Assembler InputType" superClass="%Base.Assembler.shcInputType.Id"/>
 							</tool>
 							<tool command="rlink" id="com.renesas.cdt.rxc.hardwaredebug.win32.tool.linker.Id.1132098181" name="Linker" superClass="com.renesas.cdt.rxc.hardwaredebug.win32.tool.linker.Id">
@@ -299,10 +299,11 @@
 								<option id="com.renesas.cdt.renesas.Linker.option.typeOfOutputFileOption.2057429821" name="Type of output file:" superClass="com.renesas.cdt.renesas.Linker.option.typeOfOutputFileOption" value="com.renesas.cdt.renesas.Linker.option.typeOfOutputFileOption.stypeViaAbsolute" valueType="enumerated"/>
 								<option defaultValue="None" id="com.renesas.cdt.renesas.Linker.option.debugInformation.661216034" name="Debug information" superClass="com.renesas.cdt.renesas.Linker.option.debugInformation" value="com.renesas.cdt.renesas.Linker.option.debugInformation.outputLoadModule" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="com.renesas.cdt.renesas.Linker.option.linkOrder.1447799132" name="%option.name.179" superClass="com.renesas.cdt.renesas.Linker.option.linkOrder" valueType="stringList"/>
-								<option id="com.renesas.cdt.renesas.Linker.option.optimize.284002735" name="Optimize" superClass="com.renesas.cdt.renesas.Linker.option.optimize" value="com.renesas.cdt.renesas.Linker.option.optimize.speed" valueType="enumerated"/>
-								<option id="com.renesas.cdt.renesas.Linker.option.eliminateDeadCode.259067994" name="Eliminate dead code" superClass="com.renesas.cdt.renesas.Linker.option.eliminateDeadCode" value="true" valueType="boolean"/>
+								<option id="com.renesas.cdt.renesas.Linker.option.optimize.284002735" name="Optimize" superClass="com.renesas.cdt.renesas.Linker.option.optimize" value="com.renesas.cdt.renesas.Linker.option.optimize.safe" valueType="enumerated"/>
+								<option id="com.renesas.cdt.renesas.Linker.option.eliminateDeadCode.259067994" name="Eliminate dead code" superClass="com.renesas.cdt.renesas.Linker.option.eliminateDeadCode" value="false" valueType="boolean"/>
 								<option id="com.renesas.cdt.renesas.Linker.option.optimizeBranchesOutput.1251635326" name="Optimize branches" superClass="com.renesas.cdt.renesas.Linker.option.optimizeBranchesOutput" value="true" valueType="boolean"/>
 								<option id="com.renesas.cdt.renesas.Linker.option.useShort.1382145290" name="Use short disp/imm" superClass="com.renesas.cdt.renesas.Linker.option.useShort" value="true" valueType="boolean"/>
+								<option id="com.renesas.cdt.renesas.Linker.option.eliminateSameCode.1972840179" superClass="com.renesas.cdt.renesas.Linker.option.eliminateSameCode" value="false" valueType="boolean"/>
 							</tool>
 							<tool id="%com.renesas.cdt.rxc.hardwaredebug.win32.tool.libgen.Id.1783127348" name="Standard Library" superClass="%com.renesas.cdt.rxc.hardwaredebug.win32.tool.libgen.Id">
 								<option id="com.renesas.cdt.rxc.HardwareDebug.StandardLibrary.option.cpu.35921798" name="CPU" superClass="com.renesas.cdt.rxc.HardwareDebug.StandardLibrary.option.cpu" value="com.renesas.cdt.rxc.HardwareDebug.StandardLibrary.option.cpu.rx600" valueType="enumerated"/>

@@ -3,15 +3,15 @@
 typedef struct
 {
   uint8_t* receive;/*!< Receive buffer (ring buffer).*/
-  uint16_t receiveSize;/*!< The size of recive.*/
+  uint32_t receiveSize;/*!< The size of recive.*/
   uint8_t* transmit; /*!< The transmit buffer (ring buffer).*/
-  uint16_t transmitSize;/*!< The size of transmit.*/
-  uint16_t bytesInReceiveBuffer; /*!< The number of byte in the receive buffer.*/
-  uint16_t receiveHead; /*!< The head of the receive buffer.*/
-  uint16_t receiveTail; /*!< The tail of the receive buffer.*/
-  uint16_t transmitHead; /*!< The head of the transmit buffer.*/
-  uint16_t transmitTail; /*!< The tail of the transmit buffer.*/
-  uint16_t bytesInTransmitBuffer; /*!< The number of byte in the transmit buffer.*/
+  uint32_t transmitSize;/*!< The size of transmit.*/
+  uint32_t bytesInReceiveBuffer; /*!< The number of byte in the receive buffer.*/
+  uint32_t receiveHead; /*!< The head of the receive buffer.*/
+  uint32_t receiveTail; /*!< The tail of the receive buffer.*/
+  uint32_t transmitHead; /*!< The head of the transmit buffer.*/
+  uint32_t transmitTail; /*!< The tail of the transmit buffer.*/
+  uint32_t bytesInTransmitBuffer; /*!< The number of byte in the transmit buffer.*/
 
   bool_t sendingActive;
 
@@ -221,12 +221,23 @@ void trace_initializeUart()
 
 }
 
-
 static uint32_t trace_writePossible(void)
 {
-  return g_uartData.transmitSize - g_uartData.bytesInTransmitBuffer;
-}
+  uint32_t result;
 
+  /*Disable TXE interrupt*/
+  UART_IER_TX &= ~(1u << UART_IER_TX_BIT);
+
+  result = g_uartData.transmitSize - g_uartData.bytesInTransmitBuffer;
+
+  if (g_uartData.sendingActive)
+  {
+    /*Enable TXE interrupt*/
+    UART_IER_TX |= (1u << UART_IER_TX_BIT);
+  }
+
+  return result;
+}
 
 static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t bufferSize)
 {
@@ -284,7 +295,6 @@ static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t buffe
   return writtenBytes;
 }
 
-
 uint32_t trace_write(const uint8_t buffer[], const uint32_t bufferSize, bool_t waitUntilAllBytesAreInBuffer)
 {
 
@@ -313,7 +323,6 @@ uint32_t trace_peak(void)
 {
   return g_uartData.bytesInReceiveBuffer;
 }
-
 
 uint32_t trace_read(uint8_t buffer[], const uint32_t bufferSize)
 {
