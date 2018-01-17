@@ -858,7 +858,7 @@ static int num2straux (char *buff, int sz, lua_Number x) {
     m = adddigit(buff, n++, m * (1 << L_NBFD));  /* add first digit */
     e -= L_NBFD;  /* this digit goes before the radix point */
     if (m > 0) {  /* more digits? */
-      buff[n++] = LUA__DECIMAL_POINT;  /* add radix point */
+      buff[n++] = LUA_DECIMAL_POINT;  /* add radix point */
       do {  /* add as many digits as needed */
         m = adddigit(buff, n++, m * 16);
       } while (m > 0);
@@ -933,7 +933,7 @@ static void addquoted (luaL_Buffer *b, const char *s, size_t len) {
 */
 static void checkdp (char *buff, int nb) {
   if (memchr(buff, '.', nb) == NULL) {  /* no dot? */
-    char point = LUA__DECIMAL_POINT;  /* try locale point */
+    char point = LUA_DECIMAL_POINT;  /* try locale point */
     char *ppoint = (char *)memchr(buff, point, nb);
     if (ppoint) *ppoint = '.';  /* change it to a dot */
   }

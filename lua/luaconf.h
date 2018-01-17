@@ -699,8 +699,8 @@ extern void luaAbort(void);
 ** Change that if you do not want to use C locales. (Code using this
 ** macro must include header 'locale.h'.)
 */
-#if !defined(LUA__DECIMAL_POINT)
-#define LUA__DECIMAL_POINT		'.' /*(localeconv()->decimal_point[0])*/
+#if !defined(LUA_DECIMAL_POINT)
+#define LUA_DECIMAL_POINT		'.' /*(localeconv()->decimal_point[0])*/
 #endif
 
 /* }================================================================== */
