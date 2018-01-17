@@ -273,8 +273,11 @@ static uint32_t trace_writeInternal(const uint8_t buffer[], const uint32_t buffe
 
     g_uartData.bytesInTransmitBuffer += writtenBytes;
 
-    /*Enable TXE interrupt*/
-    UART_IER_TX |= (1u << UART_IER_TX_BIT);
+    if (g_uartData.sendingActive)
+    {
+      /*Enable TXE interrupt*/
+      UART_IER_TX |= (1u << UART_IER_TX_BIT);
+    }
 
   }/*if (writtenBytes != 0U)*/
 
