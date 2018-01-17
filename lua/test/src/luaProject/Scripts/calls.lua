@@ -236,15 +236,6 @@ function read1 (x)
   end
 end
 
-a = assert(load(read1(x), "modname"))
-assert(a() == "\0" and _G.x == 33)
---assert(debug.getinfo(a).source == "modname")
-
-x = string.dump(loadstring("x = 1; return x"))
-i = 0
-a = assert(load(read1(x)))
-assert(a() == 1 and _G.x == 1)
-
 i = 0
 local a, b = load(read1("*a = 123"))
 assert(not a and type(b) == "string" and i == 2)

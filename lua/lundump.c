@@ -7,6 +7,8 @@
 #define lundump_c
 #define LUA_CORE
 
+#ifdef WITH_PRECOMPILED_SCRIPTS
+
 #include "lprefix.h"
 
 
@@ -276,4 +278,6 @@ LClosure *luaU_undump(lua_State *L, ZIO *Z, const char *name) {
   luai_verifycode(L, buff, cl->p);
   return cl;
 }
+
+#endif
 

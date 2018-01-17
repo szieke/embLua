@@ -76,8 +76,9 @@ typedef union {
 
 
 /* types of 'usual argument conversions' for lua_Number and lua_Integer */
-typedef LUAI_UACNUMBER l_uacNumber;
 typedef LUAI_UACINT l_uacInt;
+typedef LUAI_UACNUMBER l_uacNumber;
+
 
 
 /* internal assertions for in-house debugging */

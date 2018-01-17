@@ -263,35 +263,6 @@ static void close_state (lua_State *L) {
 }
 
 
-LUA_API lua_State *lua_newthread (lua_State *L) {
-  global_State *g = G(L);
-  lua_State *L1;
-  lua_lock(L);
-  luaC_checkGC(L);
-  /* create new thread */
-  L1 = &cast(LX *, luaM_newobject(L, LUA_TTHREAD, sizeof(LX)))->l;
-  L1->marked = luaC_white(g);
-  L1->tt = LUA_TTHREAD;
-  /* link it on list 'allgc' */
-  L1->next = g->allgc;
-  g->allgc = obj2gco(L1);
-  /* anchor it on L stack */
-  setthvalue(L, L->top, L1);
-  api_incr_top(L);
-  preinit_thread(L1, g);
-  L1->hookmask = L->hookmask;
-  L1->basehookcount = L->basehookcount;
-  L1->hook = L->hook;
-  resethookcount(L1);
-  /* initialize L1 extra space */
-  memcpy(lua_getextraspace(L1), lua_getextraspace(g->mainthread),
-         LUA_EXTRASPACE);
-  luai_userstatethread(L, L1);
-  stack_init(L1, L);  /* init stack */
-  lua_unlock(L);
-  return L1;
-}
-
 
 void luaE_freethread (lua_State *L, lua_State *L1) {
   LX *l = fromstate(L1);

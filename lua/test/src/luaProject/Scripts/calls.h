@@ -176,12 +176,6 @@ function read1 (x)\n\
     return string.sub(x, i, i)\n\
   end\n\
 end\n\
-a = assert(load(read1(x), \"modname\"))\n\
-assert(a() == \"\\0\" and _G.x == 33)\n\
-x = string.dump(loadstring(\"x = 1; return x\"))\n\
-i = 0\n\
-a = assert(load(read1(x)))\n\
-assert(a() == 1 and _G.x == 1)\n\
 i = 0\n\
 local a, b = load(read1(\"*a = 123\"))\n\
 assert(not a and type(b) == \"string\" and i == 2)\n\

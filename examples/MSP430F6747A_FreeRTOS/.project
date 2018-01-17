@@ -61,11 +61,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lbaselib.c</locationURI>
 		</link>
 		<link>
-			<name>lua/lbitlib.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/lua/lbitlib.c</locationURI>
-		</link>
-		<link>
 			<name>lua/lcode.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lcode.c</locationURI>
@@ -104,11 +99,6 @@
 			<name>lua/ldo.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldo.h</locationURI>
-		</link>
-		<link>
-			<name>lua/ldump.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/lua/ldump.c</locationURI>
 		</link>
 		<link>
 			<name>lua/lfunc.c</name>

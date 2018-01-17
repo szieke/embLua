@@ -69,28 +69,6 @@ static void swapextra (lua_State *L) {
 }
 
 
-/*
-** This function can be called asynchronously (e.g. during a signal).
-** Fields 'oldpc', 'basehookcount', and 'hookcount' (set by
-** 'resethookcount') are for debug only, and it is no problem if they
-** get arbitrary values (causes at most one wrong hook call). 'hookmask'
-** is an atomic value. We assume that pointers are atomic too (e.g., gcc
-** ensures that for all platforms where it runs). Moreover, 'hook' is
-** always checked before being called (see 'luaD_hook').
-*/
-LUA_API void lua_sethook (lua_State *L, lua_Hook func, int mask, int count) {
-  if (func == NULL || mask == 0) {  /* turn off hooks? */
-    mask = 0;
-    func = NULL;
-  }
-  if (isLua(L->ci))
-    L->oldpc = L->ci->u.l.savedpc;
-  L->hook = func;
-  L->basehookcount = count;
-  resethookcount(L);
-  L->hookmask = cast_byte(mask);
-}
-
 
 LUA_API lua_Hook lua_gethook (lua_State *L) {
   return L->hook;
@@ -131,81 +109,6 @@ static const char *upvalname (Proto *p, int uv) {
 }
 
 
-static const char *findvararg (CallInfo *ci, int n, StkId *pos) {
-  int nparams = clLvalue(ci->func)->p->numparams;
-  if (n >= cast_int(ci->u.l.base - ci->func) - nparams)
-    return NULL;  /* no such vararg */
-  else {
-    *pos = ci->func + nparams + n;
-    return "(*vararg)";  /* generic name for any vararg */
-  }
-}
-
-
-static const char *findlocal (lua_State *L, CallInfo *ci, int n,
-                              StkId *pos) {
-  const char *name = NULL;
-  StkId base;
-  if (isLua(ci)) {
-    if (n < 0)  /* access to vararg values? */
-      return findvararg(ci, -n, pos);
-    else {
-      base = ci->u.l.base;
-      name = luaF_getlocalname(ci_func(ci)->p, n, currentpc(ci));
-    }
-  }
-  else
-    base = ci->func + 1;
-  if (name == NULL) {  /* no 'standard' name? */
-    StkId limit = (ci == L->ci) ? L->top : ci->next->func;
-    if (limit - base >= n && n > 0)  /* is 'n' inside 'ci' stack? */
-      name = "(*temporary)";  /* generic name for any valid slot */
-    else
-      return NULL;  /* no name */
-  }
-  *pos = base + (n - 1);
-  return name;
-}
-
-
-LUA_API const char *lua_getlocal (lua_State *L, const lua_Debug *ar, int n) {
-  const char *name;
-  lua_lock(L);
-  swapextra(L);
-  if (ar == NULL) {  /* information about non-active function? */
-    if (!isLfunction(L->top - 1))  /* not a Lua function? */
-      name = NULL;
-    else  /* consider live variables at function start (parameters) */
-      name = luaF_getlocalname(clLvalue(L->top - 1)->p, n, 0);
-  }
-  else {  /* active function; get information through 'ar' */
-    StkId pos = NULL;  /* to avoid warnings */
-    name = findlocal(L, ar->i_ci, n, &pos);
-    if (name) {
-      setobj2s(L, L->top, pos);
-      api_incr_top(L);
-    }
-  }
-  swapextra(L);
-  lua_unlock(L);
-  return name;
-}
-
-
-LUA_API const char *lua_setlocal (lua_State *L, const lua_Debug *ar, int n) {
-  StkId pos = NULL;  /* to avoid warnings */
-  const char *name;
-  lua_lock(L);
-  swapextra(L);
-  name = findlocal(L, ar->i_ci, n, &pos);
-  if (name) {
-    setobjs2s(L, pos, L->top - 1);
-    L->top--;  /* pop value */
-  }
-  swapextra(L);
-  lua_unlock(L);
-  return name;
-}
 
 
 static void funcinfo (lua_Debug *ar, Closure *cl) {
