@@ -4,10 +4,8 @@
 
 
 
-#define LUA_HEAP_SIZE (450000)
+#define LUA_HEAP_SIZE (400000)
 
-
-#define lua_getlocaledecpoint() '.'
-
+#define LUA_WITH_MATH
 
 #endif /* LUAPROJECTCONFIG_H_ */

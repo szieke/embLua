@@ -31,6 +31,7 @@
 #include "sort.h"
 #include "strings.h"
 #include "vararg.h"
+#include "mathTests.h"
 
 void main(void);
 
@@ -76,6 +77,26 @@ void main(void)
     lua_writestringWithoutsize("\nStart: ");
     sprintf(buffer, "%i", counter++);
     lua_writestringWithoutsize(buffer);
+    lua_writeline();
+
+    /**********************sort.lua************************************************/
+
+    if (dostring(L, sort, "sort") != LUA_OK)
+    {
+      while (1)
+        ;
+    }
+    lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+    lua_writeline();
+
+    /**********************mathTests.lua************************************************/
+
+    if (dostring(L, mathTests, "mathTests") != LUA_OK)
+    {
+      while (1)
+        ;
+    }
+    lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
     lua_writeline();
 
     /**********************calls.lua************************************************/
@@ -137,8 +158,6 @@ void main(void)
     lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
     lua_writeline();
 
-
-
     /***Reopen Lua***********************/
     lua_close(L);
 
@@ -184,16 +203,6 @@ void main(void)
     /**********************pm.lua************************************************/
 
     if (dostring(L, pm, "pm") != LUA_OK)
-    {
-      while (1)
-        ;
-    }
-    lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
-    lua_writeline();
-
-    /**********************sort.lua************************************************/
-
-    if (dostring(L, sort, "sort") != LUA_OK)
     {
       while (1)
         ;

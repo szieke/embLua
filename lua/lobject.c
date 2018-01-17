@@ -191,7 +191,7 @@ static int isneg (const char **s) {
 ** C99 specification for 'strtod'
 */
 static lua_Number lua_strx2number (const char *s, char **endptr) {
-  int dot = lua_getlocaledecpoint();
+  int dot = LUA__DECIMAL_POINT;
   lua_Number r = 0.0;  /* result (accumulator) */
   int sigdig = 0;  /* number of significant digits */
   int nosigdig = 0;  /* number of non-significant digits */
@@ -284,7 +284,7 @@ static const char *l_str2d (const char *s, lua_Number *result) {
     if (strlen(s) > L_MAXLENNUM || pdot == NULL)
       return NULL;  /* string too long or no dot; fail */
     strcpy(buff, s);  /* copy string to buffer */
-    buff[pdot - s] = lua_getlocaledecpoint();  /* correct decimal point */
+    buff[pdot - s] = LUA__DECIMAL_POINT;  /* correct decimal point */
     endptr = l_str2dloc(buff, result, mode);  /* try again */
     if (endptr != NULL)
       endptr = s + (endptr - buff);  /* make relative to 's' */
@@ -378,7 +378,7 @@ void luaO_tostring (lua_State *L, StkId obj) {
     len = lua_number2str(buff, sizeof(buff), fltvalue(obj));
 #if !defined(LUA_COMPAT_FLOATSTRING)
     if (buff[strspn(buff, "-0123456789")] == '\0') {  /* looks like an int? */
-      buff[len++] = lua_getlocaledecpoint();
+      buff[len++] = LUA__DECIMAL_POINT;
       buff[len++] = '0';  /* adds '.0' to result */
     }
 #endif

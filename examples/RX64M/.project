@@ -151,6 +151,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/lua/llimits.h</locationURI>
 		</link>
 		<link>
+			<name>src/lua/lmathlib.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/lua/lmathlib.c</locationURI>
+		</link>
+		<link>
 			<name>src/lua/lmem.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lmem.c</locationURI>

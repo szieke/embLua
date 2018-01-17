@@ -78,7 +78,7 @@ function f(b)
     if b==1 then local b=1; x=10; break
     elseif b==2 then x=20; break;
     elseif b==3 then x=30;
-    else local a,b,c,d=2; x=x+1;
+    else local a,b,c,d=math.sin(1); x=x+1;
     end
   until x>=12;
   return x;
@@ -192,7 +192,6 @@ end
 
 a,b = F(1)~=nil; assert(a == true and b == nil);
 a,b = F(nil)==nil; assert(a == true and b == nil)
-
 
 
 print'  OK'

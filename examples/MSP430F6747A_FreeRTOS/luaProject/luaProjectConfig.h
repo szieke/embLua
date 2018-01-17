@@ -31,6 +31,5 @@ extern short xTaskResumeAll(void);
 
 #define LUA_HEAP_SIZE (2 * 13000)
 
-#define lua_getlocaledecpoint() '.'
 
 #endif /* LUAPROJECTCONFIG_H_ */

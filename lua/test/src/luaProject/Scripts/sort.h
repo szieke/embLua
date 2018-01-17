@@ -13,7 +13,7 @@ limit = 300\n\
 if rawget(_G, \"_soft\") then limit = 300 end\n\
 a = {}\n\
 for i=1,limit do\n\
-  a[i] = 3474747 / i\n\
+  a[i] = math.random()\n\
 end\n\
 table.sort(a)\n\
 check(a)\n\
@@ -21,7 +21,7 @@ table.sort(a)\n\
 check(a)\n\
 a = {}\n\
 for i=1,limit do\n\
-  a[i] = 7847589 / i\n\
+  a[i] = math.random()\n\
 end\n\
 i=0\n\
 table.sort(a, function(x,y) i=i+1; return y<x end)\n\
@@ -41,7 +41,7 @@ table.sort(a, function (x, y)\n\
         end)\n\
 tt = {__lt = function (a,b) return a.val < b.val end}\n\
 a = {}\n\
-for i=1,10 do  a[i] = {val=455358 / i}; setmetatable(a[i], tt); end\n\
+for i=1,10 do  a[i] = {val=math.random(100)}; setmetatable(a[i], tt); end\n\
 table.sort(a)\n\
 check(a, tt.__lt)\n\
 check(a)\n\

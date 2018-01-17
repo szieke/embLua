@@ -19,14 +19,12 @@ end\n\
 assert(doit(\"error('hi', 0)\") == 'hi')\n\
 assert(doit(\"error()\") == nil)\n\
 assert(doit(\"unpack({}, 1, n=2^30)\"))\n\
-assert(doit(\"a=math.sin()\"))\n\
 assert(not doit(\"tostring(1)\") and doit(\"tostring()\"))\n\
 assert(doit\"tonumber()\")\n\
 assert(doit\"repeat until 1; a\")\n\
 assert(doit\"return;;\")\n\
 assert(doit\"assert(false)\")\n\
 assert(doit\"assert(nil)\")\n\
-assert(doit\"a=math.sin\\n(3)\")\n\
 assert(doit(\"function a (... , ...) end\"))\n\
 assert(doit(\"function a (, ...) end\"))\n\
 checkmessage(\"a={}; do local a=1 end a:bbbb(3)\", \"method 'bbbb'\")\n\

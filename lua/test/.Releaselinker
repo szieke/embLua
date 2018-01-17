@@ -10,9 +10,6 @@
   <sections name="R_2"/>
   <sections name="B"/>
   <sections name="R"/>
-  <sections name="BEnd_of_RAM">
-    <sectionAddress xsi:type="com.renesas.linkersection.model:FixedAddress" fixedAddress="524284"/>
-  </sections>
   <sections name="PResetPRG">
     <sectionAddress xsi:type="com.renesas.linkersection.model:FixedAddress" fixedAddress="4290772992"/>
   </sections>

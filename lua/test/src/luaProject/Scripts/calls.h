@@ -163,6 +163,7 @@ a = ret2{ unlpack{1,2,3}, unlpack{3,2,1}, unlpack{\"a\", \"b\"}}\n\
 assert(a[1] == 1 and a[2] == 3 and a[3] == \"a\" and a[4] == \"b\")\n\
 rawget({}, \"x\", 1)\n\
 rawset({}, \"x\", 1, 2)\n\
+assert(math.sin(1,2) == math.sin(1))\n\
 table.sort({10,9,8,4,19,23,0,0}, function (a,b) return a<b end, \"extra arg\")\n\
 x = \"-- a comment\\0\\0\\0\\n  x = 10 + \\n23; \\\n\
      local a = function () x = 'hi' end; \\\n\

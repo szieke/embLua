@@ -60,7 +60,7 @@ function f(b)\n\
     if b==1 then local b=1; x=10; break\n\
     elseif b==2 then x=20; break;\n\
     elseif b==3 then x=30;\n\
-    else local a,b,c,d=2; x=x+1;\n\
+    else local a,b,c,d=math.sin(1); x=x+1;\n\
     end\n\
   until x>=12;\n\
   return x;\n\
