@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 //This function is called by Lua cannot handle an occured error.
 void luaAbort(void)
 {

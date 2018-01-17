@@ -6,7 +6,7 @@ assert(not nil and 2 and not(2>3 or 3<2));\n\
 assert(-3-1-5 == 0+0-9);\n\
 assert(-2^2 == -4 and (-2)^2 == 4 and 2*2-3-1 == 0);\n\
 assert(2*1+3/3 == 3 and 1+2 .. 3*1 == \"33\");\n\
-assert(not(2+1 > 3*1) and \"a\"..\"b\"> \"a\");\n\
+assert(not(2+1 > 3*1) and \"a\"..\"b\" > \"a\");\n\
 assert(not ((true or false) and nil))\n\
 assert(      true or false  and nil)\n\
 local a,b = 1,nil;\n\
@@ -20,7 +20,7 @@ assert((x>y) and x or y == 2);\n\
 assert(1234567890 == tonumber('1234567890') and 1234567890+1 == 1234567891)\n\
 repeat until 1; repeat until true;\n\
 while false do end; while nil do end;\n\
-do\n\
+do  -- test old bug (first name could not be an `upvalue')\n\
  local a; function f(x) x={a=1}; x={x=1}; x={G=1} end\n\
 end\n\
 function f (i)\n\
@@ -116,7 +116,7 @@ return function ( a , b , c , d , e )\n\
   return x\n\
 end , { a = 1 , b = 2 >= 1 , } or { 1 };\n\
 ]]\n\
-f = string.gsub(f, \"%s+\", \"\\n\");\n\
+f = string.gsub(f, \"%s+\", \"\\n\");   -- force a SETLINE between opcodes\n\
 f,a = loadstring(f)();\n\
 assert(a.a == 1 and a.b)\n\
 function g (a,b,c,d,e)\n\
@@ -129,7 +129,7 @@ end;\n\
 assert(f(2,1) == true and g(2,1) == 1 and h(2,1) == 1)\n\
 assert(f(1,2,'a') == 'a' and g(1,2,'a') == 1 and h(1,2,'a') == 1)\n\
 assert(f(1,2,'a')\n\
-~=\n\
+~=          -- force SETLINE before nil\n\
 nil, \"\")\n\
 assert(f(1,2,'a') == 'a' and g(1,2,'a') == 1 and h(1,2,'a') == 1)\n\
 assert(f(1,2,nil,1,'x') == 'x' and g(1,2,nil,1,'x') == 1 and\n\
@@ -142,10 +142,11 @@ assert(1 and 2<3 == true and 2<3 and 'a'<'b' == true)\n\
 x = 2<3 and not 3; assert(x==false)\n\
 x = 2<1 or (2>1 and 'a'); assert(x=='a')\n\
 do\n\
-  local a; if nil then a=1; else a=2; end;\n\
+  local a; if nil then a=1; else a=2; end;    -- this nil comes as PUSHNIL 2\n\
   assert(a==2)\n\
 end\n\
 function F(a)\n\
+  --assert(debug.getinfo(1, \"n\").name == 'F')\n\
   return a,2,3\n\
 end\n\
 a,b = F(1)~=nil; assert(a == true and b == nil);\n\

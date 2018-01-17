@@ -37,17 +37,17 @@ function a.b.c:f2 (x,y) self[x] = y end\n\
 assert(a.b.c.f1(4) == 5)\n\
 a.b.c:f2('k', 12); assert(a.b.c.k == 12)\n\
 print('+')\n\
-t = nil\n\
+t = nil   -- 'declare' t\n\
 function f(a,b,c) local d = 'a'; t={a,b,c,d} end\n\
-f(\n\
+f(      -- this line change must be valid\n\
   1,2)\n\
 assert(t[1] == 1 and t[2] == 2 and t[3] == nil and t[4] == 'a')\n\
-f(1,2,\n\
+f(1,2,   -- this one too\n\
       3,4)\n\
 assert(t[1] == 1 and t[2] == 2 and t[3] == 3 and t[4] == 'a')\n\
 function fat(x)\n\
   if x <= 1 then return 1\n\
-  else return x*loadstring(\"return fat(\".. x-1 .. \")\")()\n\
+  else return x*loadstring(\"return fat(\" .. x-1 .. \")\")()\n\
   end\n\
 end\n\
 assert(loadstring \"loadstring 'assert(fat(6)==720)' () \")()\n\
@@ -94,9 +94,9 @@ assert(#x == lim and x[1] == 1 and x[lim] == lim)\n\
 x = {unpack(a, lim-2)}\n\
 assert(#x == 3 and x[1] == lim-2 and x[3] == lim)\n\
 x = {unpack(a, 10, 6)}\n\
-assert(next(x) == nil)\n\
+assert(next(x) == nil)   -- no elements\n\
 x = {unpack(a, 11, 10)}\n\
-assert(next(x) == nil)\n\
+assert(next(x) == nil)   -- no elements\n\
 x,y = unpack(a, 10, 10)\n\
 assert(x == 10 and y == nil)\n\
 x,y,z = unpack(a, 10, 11)\n\
@@ -160,7 +160,7 @@ assert(a==1 and b==1 and c==2 and d==nil)\n\
 a,b,c,d = unlpack(pack(ret2(f()), (ret2(f()))))\n\
 assert(a==1 and b==1 and c==nil and d==nil)\n\
 a = ret2{ unlpack{1,2,3}, unlpack{3,2,1}, unlpack{\"a\", \"b\"}}\n\
-assert(a[1] == 1 and a[2] == 3 and a[3] == \"a\"and a[4] == \"b\")\n\
+assert(a[1] == 1 and a[2] == 3 and a[3] == \"a\" and a[4] == \"b\")\n\
 rawget({}, \"x\", 1)\n\
 rawset({}, \"x\", 1, 2)\n\
 table.sort({10,9,8,4,19,23,0,0}, function (a,b) return a<b end, \"extra arg\")\n\
@@ -176,14 +176,14 @@ function read1 (x)\n\
   end\n\
 end\n\
 a = assert(load(read1(x), \"modname\"))\n\
-assert(a() == \"\\0\"and _G.x == 33)\n\
+assert(a() == \"\\0\" and _G.x == 33)\n\
 x = string.dump(loadstring(\"x = 1; return x\"))\n\
 i = 0\n\
 a = assert(load(read1(x)))\n\
 assert(a() == 1 and _G.x == 1)\n\
 i = 0\n\
 local a, b = load(read1(\"*a = 123\"))\n\
-assert(not a and type(b) == \"string\"and i == 2)\n\
+assert(not a and type(b) == \"string\" and i == 2)\n\
 a, b = load(function () error(\"hhi\") end)\n\
 assert(not a and string.find(b, \"hhi\"))\n\
 x = [[\n\

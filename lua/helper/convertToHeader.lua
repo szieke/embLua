@@ -38,10 +38,8 @@ function convertFile(fileName)
 	local tmpString = content
 	repeat
 		content = tmpString
-		tmpString = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
+		tmpString = string.gsub(content, '[\r\n]%-%-(.-)[\r\n]', '\n')
 	until(tmpString == content)
-
-	--content = string.gsub(content, '[^"\']%-%-(.-)[\r\n]', '\n')
 	
 	content = string.gsub(content, '\\', '\\\\')
 	content = string.gsub(content, '"', '\\"')
@@ -57,8 +55,7 @@ function convertFile(fileName)
 	newContent = string.gsub(newContent, '[\r\n]\\n\\[\r\n]', '\n')
 	newContent = string.gsub(newContent, '\\n\\[\r\n]\\n\\', '\\n\\')
 	
-	--Remove Space and tabs in front of code.
-	newContent = string.gsub(newContent, '\"[\t ]*', '\"')
+	
 	
 	newContent = newContent .. "\n"
 	

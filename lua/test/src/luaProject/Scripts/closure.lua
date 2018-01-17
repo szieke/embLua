@@ -1,4 +1,4 @@
-print "testing closures and coroutines"
+print "testing closures"
 
 local A,B = 0,{g=10}
 function f(x)

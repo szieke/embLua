@@ -1,4 +1,4 @@
-static const char* closure="print \"testing closures and coroutines\"\n\
+static const char* closure="print \"testing closures\"\n\
 local A,B = 0,{g=10}\n\
 function f(x)\n\
   local a = {}\n\
@@ -18,10 +18,10 @@ function f(x)\n\
   return a\n\
 end\n\
 a = f(10)\n\
-local x = {[1] = {}}\n\
+local x = {[1] = {}}   -- to detect a GC\n\
 setmetatable(x, {__mode = 'kv'})\n\
-while x[1] do\n\
-  local a = A..A..A..A\n\
+while x[1] do   -- repeat until GC\n\
+  local a = A..A..A..A  -- create garbage\n\
   A = A+1\n\
 end\n\
 assert(a[1]() == 20+A)\n\
@@ -58,7 +58,7 @@ r,s = a[1].get()\n\
 assert(r == 10 and s == 20)\n\
 a[2].set('a', 'b')\n\
 r,s = a[2].get()\n\
-assert(r == \"a\"and s == \"b\")\n\
+assert(r == \"a\" and s == \"b\")\n\
 for i=1,3 do\n\
   f = function () return i end\n\
   break\n\
@@ -117,8 +117,8 @@ until i > 10 or a[i]() ~= x\n\
 assert(i == 11 and a[1]() == 1 and a[3]() == 3 and i == 4)\n\
 print'+'\n\
 local function t ()\n\
-  local function c(a,b) assert(a==\"test\"and b==\"OK\") end\n\
-  local function v(f, ...) c(\"test\", f() ~= 1 and \"FAILED\"or \"OK\") end\n\
+  local function c(a,b) assert(a==\"test\" and b==\"OK\") end\n\
+  local function v(f, ...) c(\"test\", f() ~= 1 and \"FAILED\" or \"OK\") end\n\
   local x = 1\n\
   return v(function() return x end)\n\
 end\n\

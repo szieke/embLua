@@ -37,13 +37,13 @@ do\n\
   local a;\n\
   a = setmetatable({}, {__index = setmetatable({},\n\
                      {__index = setmetatable({},\n\
-                     {__index = function (_,n) return a[n-3]+4, \"lixo\"end})})})\n\
+                     {__index = function (_,n) return a[n-3]+4, \"lixo\" end})})})\n\
   a[0] = 20\n\
   for i=0,10 do\n\
     assert(a[i*3] == 20 + i*4)\n\
   end\n\
 end\n\
-do\n\
+do  -- newindex\n\
   local foi\n\
   local a = {}\n\
   for i=1,10 do a[i] = 0; a['a'..i] = 0; end\n\
@@ -76,34 +76,34 @@ t.__mod = f(\"mod\")\n\
 t.__unm = f(\"unm\")\n\
 t.__pow = f(\"pow\")\n\
 assert(b+5 == b)\n\
-assert(cap[0] == \"add\"and cap[1] == b and cap[2] == 5 and cap[3]==nil)\n\
+assert(cap[0] == \"add\" and cap[1] == b and cap[2] == 5 and cap[3]==nil)\n\
 assert(b+'5' == b)\n\
-assert(cap[0] == \"add\"and cap[1] == b and cap[2] == '5' and cap[3]==nil)\n\
+assert(cap[0] == \"add\" and cap[1] == b and cap[2] == '5' and cap[3]==nil)\n\
 assert(5+b == 5)\n\
-assert(cap[0] == \"add\"and cap[1] == 5 and cap[2] == b and cap[3]==nil)\n\
+assert(cap[0] == \"add\" and cap[1] == 5 and cap[2] == b and cap[3]==nil)\n\
 assert('5'+b == '5')\n\
-assert(cap[0] == \"add\"and cap[1] == '5' and cap[2] == b and cap[3]==nil)\n\
+assert(cap[0] == \"add\" and cap[1] == '5' and cap[2] == b and cap[3]==nil)\n\
 b=b-3; assert(getmetatable(b) == t)\n\
 assert(5-a == 5)\n\
-assert(cap[0] == \"sub\"and cap[1] == 5 and cap[2] == a and cap[3]==nil)\n\
+assert(cap[0] == \"sub\" and cap[1] == 5 and cap[2] == a and cap[3]==nil)\n\
 assert('5'-a == '5')\n\
-assert(cap[0] == \"sub\"and cap[1] == '5' and cap[2] == a and cap[3]==nil)\n\
+assert(cap[0] == \"sub\" and cap[1] == '5' and cap[2] == a and cap[3]==nil)\n\
 assert(a*a == a)\n\
-assert(cap[0] == \"mul\"and cap[1] == a and cap[2] == a and cap[3]==nil)\n\
+assert(cap[0] == \"mul\" and cap[1] == a and cap[2] == a and cap[3]==nil)\n\
 assert(a/0 == a)\n\
-assert(cap[0] == \"div\"and cap[1] == a and cap[2] == 0 and cap[3]==nil)\n\
+assert(cap[0] == \"div\" and cap[1] == a and cap[2] == 0 and cap[3]==nil)\n\
 assert(a%2 == a)\n\
-assert(cap[0] == \"mod\"and cap[1] == a and cap[2] == 2 and cap[3]==nil)\n\
+assert(cap[0] == \"mod\" and cap[1] == a and cap[2] == 2 and cap[3]==nil)\n\
 assert(-a == a)\n\
-assert(cap[0] == \"unm\"and cap[1] == a)\n\
+assert(cap[0] == \"unm\" and cap[1] == a)\n\
 assert(a^4 == a)\n\
-assert(cap[0] == \"pow\"and cap[1] == a and cap[2] == 4 and cap[3]==nil)\n\
+assert(cap[0] == \"pow\" and cap[1] == a and cap[2] == 4 and cap[3]==nil)\n\
 assert(a^'4' == a)\n\
-assert(cap[0] == \"pow\"and cap[1] == a and cap[2] == '4' and cap[3]==nil)\n\
+assert(cap[0] == \"pow\" and cap[1] == a and cap[2] == '4' and cap[3]==nil)\n\
 assert(4^a == 4)\n\
-assert(cap[0] == \"pow\"and cap[1] == 4 and cap[2] == a and cap[3]==nil)\n\
+assert(cap[0] == \"pow\" and cap[1] == 4 and cap[2] == a and cap[3]==nil)\n\
 assert('4'^a == '4')\n\
-assert(cap[0] == \"pow\"and cap[1] == '4' and cap[2] == a and cap[3]==nil)\n\
+assert(cap[0] == \"pow\" and cap[1] == '4' and cap[2] == a and cap[3]==nil)\n\
 t = {}\n\
 t.__lt = function (a,b,c)\n\
   collectgarbage()\n\
@@ -130,7 +130,7 @@ t.__le = function (a,b,c)\n\
   if type(b) == 'table' then b = b.x end\n\
  return a<=b, \"dummy\"\n\
 end\n\
-test()\n\
+test()  -- retest comparisons, now using both `lt' and `le'\n\
 local function Set(x)\n\
   local y = {}\n\
   for _,k in pairs(x) do y[k] = 1 end\n\
@@ -148,14 +148,14 @@ assert(Set{1,2,3} < Set{1,2,3,4})\n\
 assert(not(Set{1,2,3,4} < Set{1,2,3,4}))\n\
 assert((Set{1,2,3,4} <= Set{1,2,3,4}))\n\
 assert((Set{1,2,3,4} >= Set{1,2,3,4}))\n\
-assert((Set{1,3} <= Set{3,5}))\n\
+assert((Set{1,3} <= Set{3,5}))   -- wrong!! model needs a `le' method ;-)\n\
 t.__le = function (a,b)\n\
   for k in pairs(a) do\n\
     if not b[k] then return false end\n\
   end\n\
   return true\n\
 end\n\
-assert(not (Set{1,3} <= Set{3,5}))\n\
+assert(not (Set{1,3} <= Set{3,5}))   -- now its OK!\n\
 assert(not(Set{1,3} <= Set{3,5}))\n\
 assert(not(Set{1,3} >= Set{3,5}))\n\
 t.__eq = function (a,b)\n\
@@ -172,7 +172,7 @@ assert(rawequal(s, s))\n\
 assert(Set{1,3,5,1} == Set{3,5,1})\n\
 assert(Set{1,3,5} ~= Set{3,5,1,6})\n\
 t[Set{1,3,5}] = 1\n\
-assert(t[Set{1,3,5}] == nil)\n\
+assert(t[Set{1,3,5}] == nil)   -- `__eq' is not valid for table accesses\n\
 t.__concat = function (a,b,c)\n\
   assert(c == nil)\n\
   if type(a) == 'table' then a = a.val end\n\
@@ -186,7 +186,7 @@ c = {val=\"c\"}; setmetatable(c, t)\n\
 d = {val=\"d\"}; setmetatable(d, t)\n\
 A = true\n\
 assert(c..d == 'cd')\n\
-assert(0 ..\"a\"..\"b\"..c..d..\"e\"..\"f\"..(5+3)..\"g\"== \"0abcdef8g\")\n\
+assert(0 ..\"a\"..\"b\"..c..d..\"e\"..\"f\"..(5+3)..\"g\" == \"0abcdef8g\")\n\
 A = false\n\
 x = c..d\n\
 assert(getmetatable(x) == t and x.val == 'cd')\n\
@@ -224,5 +224,5 @@ a = {}\n\
 rawset(a, \"x\", 1, 2, 3)\n\
 assert(a.x == 1 and rawget(a, \"x\", 3) == 1)\n\
 print '+'\n\
-print 'OK'\n\
+print '  OK'\n\
 return 12";

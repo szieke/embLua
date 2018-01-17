@@ -8,7 +8,7 @@
 
 
 
-
+#define lua_getlocaledecpoint() '.'
 
 
 

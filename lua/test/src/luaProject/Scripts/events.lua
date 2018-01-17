@@ -288,6 +288,6 @@ assert(a.x == 1 and rawget(a, "x", 3) == 1)
 print '+'
 
 
-print 'OK'
+print '  OK'
 
 return 12

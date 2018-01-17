@@ -61,10 +61,10 @@ function lineerror (s)\n\
   local line = string.match(msg, \":(%d+):\")\n\
   return line and line+0\n\
 end\n\
-assert(lineerror\"local a\\n for i=1,'a' do \\n print(i) \\n end\"== 2)\n\
-assert(lineerror\"\\n local a \\n for k,v in 3 \\n do \\n print(k) \\n end\"== 3)\n\
-assert(lineerror\"\\n\\n for k,v in \\n 3 \\n do \\n print(k) \\n end\"== 4)\n\
-assert(lineerror\"function a.x.y ()\\na=a+1\\nend\"== 1)\n\
+assert(lineerror\"local a\\n for i=1,'a' do \\n print(i) \\n end\" == 2)\n\
+assert(lineerror\"\\n local a \\n for k,v in 3 \\n do \\n print(k) \\n end\" == 3)\n\
+assert(lineerror\"\\n\\n for k,v in \\n 3 \\n do \\n print(k) \\n end\" == 4)\n\
+assert(lineerror\"function a.x.y ()\\na=a+1\\nend\" == 1)\n\
 local p = [[\n\
 function g() f() end\n\
 function f(x) error('a', X) end\n\
