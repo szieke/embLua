@@ -38,7 +38,7 @@ function convertFile(fileName)
 	local tmpString = content
 	repeat
 		content = tmpString
-		tmpString = string.gsub(content, '[\r\n]%-%-(.-)[\r\n]', '\n')
+		tmpString = string.gsub(content, '[\r\n][ \t]-%-%-(.-)[\r\n]', '\n')
 	until(tmpString == content)
 	
 	content = string.gsub(content, '\\', '\\\\')

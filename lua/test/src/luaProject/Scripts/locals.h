@@ -57,7 +57,6 @@ for i=2,30 do\n\
 end\n\
 print'+'\n\
 if rawget(_G, \"querytab\") then\n\
-  -- testing clearing of dead elements from tables\n\
   collectgarbage(\"stop\")   -- stop GC\n\
   local a = {[{}] = 4, [3] = 0, alo = 1,\n\
              a1234567890123456789012345678901234567890 = 10}\n\

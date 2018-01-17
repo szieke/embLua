@@ -146,7 +146,6 @@ do\n\
   assert(a==2)\n\
 end\n\
 function F(a)\n\
-  --assert(debug.getinfo(1, \"n\").name == 'F')\n\
   return a,2,3\n\
 end\n\
 a,b = F(1)~=nil; assert(a == true and b == nil);\n\
