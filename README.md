@@ -30,6 +30,8 @@ embLua can be configured to use the build in memory management functions (embLua
 - LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used protect the memory management calls if several Lua instance in different tasks are created
 - DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS: If the build in memory function shall not be used then this define must be set.
 - luaMallocFunction(size) and luaFreeFunction(pointer): These defines must be set if the build in memory management shall not be used (*DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS*)
+
+### Other configuration options 
 - luaPointerSize_t: If the size of size_t is not the pointer size on the current platform then this define must be set (example: on the MSP430 the pointer size is 32Bit but size_t is only 16Bit)
 - LUA_DECIMAL_POINT: The "radix character" (decimal point) used by Lua is per default '.'. With this define this character can be changed.
 - LUA_WITH_MATH: If the math module shall be included then this define must be set.
