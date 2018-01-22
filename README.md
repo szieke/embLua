@@ -11,7 +11,7 @@ Note: The math module is only included if the define LUA_WITH_MATH is defined in
 To run scripts which do something 'meaningful' embLua needs:
 - 13 Heap
 - 1k stack
-- ROM (not optimized code): 120 on MSP, 90k on Renesas
+- ROM (not optimized code): 120 on MSP430, 90k on Renesas
 - C-Library
 
 ## Integrating embLua
