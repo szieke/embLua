@@ -44,20 +44,11 @@ assert(f(tonumber('  ', 9)) == nil)
 assert(f(tonumber('99', 8)) == nil)
 assert(tonumber('  1010  ', 2) == 10)
 assert(tonumber('10', 36) == 36)
---assert(tonumber('\n  -10  \n', 36) == -36)
---assert(tonumber('-fFfa', 16) == -(10+(16*(15+(16*(15+(16*15)))))))
 assert(tonumber('fFfa', 15) == nil)
---assert(tonumber(string.rep('1', 42), 2) + 1 == 2^42)
---assert(tonumber(string.rep('1', 32), 2) + 1 == 2^30)
---assert(tonumber('-fffffFFFFF', 16)-1 == -2^40)
---assert(tonumber('ffffFFFF', 16)+1 == 2^32)
 
---assert(1.1 == 1.+.1)
+
 assert(100.0 == 1E2 and .01 == 1e-2)
---assert(1111111111111111-1111111111111110== 1000.00e-03)
---     1234567890123456
 assert(1.1 == '1.'+'.1')
---assert('1111111111111111'-'1111111111111110' == tonumber"  +0.001e+3 \n\t")
 
 function eq (a,b,limit)
   if not limit then limit = 10E-10 end
@@ -67,8 +58,6 @@ end
 assert(0.1e-30 > 0.9E-31 and 0.9E30 < 0.1e31)
 
 assert(0.123456 > 0.123455)
-
---assert(tonumber('+1.23E30') == 1.23*10^30)
 
 -- testing order operators
 assert(not(1<1) and (1<2) and not(2<1))
@@ -90,9 +79,7 @@ local function testbit(a, n)
   return a/2^n % 2 >= 1
 end
 
---assert(eq(math.sin(-9.8)^2 + math.cos(-9.8)^2, 1))
 assert(eq(math.tan(math.pi/4), 1))
---assert(eq(math.sin(math.pi/2), 1) and eq(math.cos(math.pi/2), 0))
 assert(eq(math.atan(1), math.pi/4) and eq(math.acos(0), math.pi/2) and
        eq(math.asin(1), math.pi/2))
 assert(eq(math.deg(math.pi/2), 90) and eq(math.rad(90), math.pi/2))
@@ -102,13 +89,7 @@ assert(math.ceil(4.5) == 5.0)
 assert(math.floor(4.5) == 4.0)
 assert(math.fmod(10,3) == 1)
 assert(eq(math.sqrt(10)^2, 10))
---assert(eq(math.log10(2), math.log(2)/math.log(10)))
---assert(eq(math.exp(0), 1))
---assert(eq(math.sin(10), math.sin(10%(2*math.pi))))
-local v,e = math.frexp(math.pi)
-assert(eq(math.ldexp(v,e), math.pi))
 
-assert(eq(math.tanh(3.5), math.sinh(3.5)/math.cosh(3.5)))
 
 assert(tonumber(' 1.3e-2 ') == 1.3e-2)
 assert(tonumber(' -1.0000001 ') == -1.0000001)

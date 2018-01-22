@@ -89,11 +89,6 @@ for i=0,40 do
   assert(#(a) == i)
 end
 
-
-assert(table.maxn{} == 0)
-assert(table.maxn{["1000"] = true} == 0)
-assert(table.maxn{["1000"] = true, [24.5] = 3} == 24.5)
-assert(table.maxn{[1000] = true} == 1000)
 print("+")
 
 

@@ -73,9 +73,6 @@ assert(math.ceil(4.5) == 5.0)\n\
 assert(math.floor(4.5) == 4.0)\n\
 assert(math.fmod(10,3) == 1)\n\
 assert(eq(math.sqrt(10)^2, 10))\n\
-local v,e = math.frexp(math.pi)\n\
-assert(eq(math.ldexp(v,e), math.pi))\n\
-assert(eq(math.tanh(3.5), math.sinh(3.5)/math.cosh(3.5)))\n\
 assert(tonumber(' 1.3e-2 ') == 1.3e-2)\n\
 assert(tonumber(' -1.0000001 ') == -1.0000001)\n\
 assert(8388609 + -8388609 == 0)\n\

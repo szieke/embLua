@@ -65,10 +65,6 @@ for i=0,40 do\n\
   for j=1,i do a[j]=j end\n\
   assert(#(a) == i)\n\
 end\n\
-assert(table.maxn{} == 0)\n\
-assert(table.maxn{[\"1000\"] = true} == 0)\n\
-assert(table.maxn{[\"1000\"] = true, [24.5] = 3} == 24.5)\n\
-assert(table.maxn{[1000] = true} == 1000)\n\
 print(\"+\")\n\
 local t = {[{1}] = 1, [{2}] = 2, [string.rep(\"x \", 4)] = 3,\n\
            [100.3] = 4, [4] = 5}\n\
