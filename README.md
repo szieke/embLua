@@ -2,7 +2,7 @@
 The aim of embLua (based on Lua 5.3.4) is to provide C/C++ developers the possibility to extend their microcontroller/embedded device with scripting functionality. The main focus of embLua is the fast/easy integration in custom projects and new platforms. Therefore only a subset of Lua modules and functions are available:
 - table module
 - string module
-- math: abs, acos, asin, atan, ceil, cos, deg, exp, tointeger, floor, fmod, ult, log, max, modf, rad, random, randomseed, sin, sqrt, tan, type, atan2, cosh, sinh, tanh, pow, frexp, ldexp, log10, pi, huge, maxinteger, mininteger
+- math: abs, acos, asin, atan, ceil, cos, deg, exp, tointeger, floor, fmod, ult, log, max, modf, rad, random, randomseed, sin, sqrt, tan, type, pi, huge, maxinteger, mininteger
 - global functions: assert, collectgarbage, error, getmetatable, ipairs, next, pairs, pcall, print, rawequal, rawlen, rawget, rawset, select, setmetatable, tonumber, tostring, type, xpcall, loadstring, load
 
 Note: The math module is only included if the define LUA_WITH_MATH is defined in luaProjectConfig.h.
@@ -11,7 +11,7 @@ Note: The math module is only included if the define LUA_WITH_MATH is defined in
 To run scripts which do something 'meaningful' embLua needs:
 - 13 Heap
 - 1k stack
-- 132k ROM (not optimized code)
+- ROM (not optimized code): 120 on MSP, 90k on Renesas
 - C-Library
 
 ## Integrating embLua
@@ -35,6 +35,7 @@ embLua can be configured to use the build in memory management functions (embLua
 - luaPointerSize_t: If the size of size_t is not the pointer size on the current platform then this define must be set (example: on the MSP430 the pointer size is 32Bit but size_t is only 16Bit)
 - LUA_DECIMAL_POINT: The "radix character" (decimal point) used by Lua is per default '.'. With this define this character can be changed.
 - LUA_WITH_MATH: If the math module shall be included then this define must be set.
+WITH_PRECOMPILED_SCRIPTS: If Lua shall execute precompiled script (luac.exe) then this define must be set.
 
 ## Embedding lua scripts
 To execute a Lua script the function dostring (embLua/lua/helperluaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
