@@ -10,7 +10,7 @@ Note: The math module is only included if the define LUA_WITH_MATH is defined in
 
 ## embLua requirements
 To run scripts which do something 'meaningful' embLua needs:
-- RAM: 12k
+- RAM: 1k Stack, 11k Heap
 - ROM (not optimized code): 120 on MSP430, 90k on Renesas
 - C-Library
 
