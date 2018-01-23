@@ -1,16 +1,16 @@
 # embLua
-The aim of embLua (based on Lua 5.3.4) is to provide C/C++ developers the possibility to extend their microcontroller/embedded device with scripting functionality. The main focus of embLua is the fast/easy integration in custom projects and new platforms. Therefore only a subset of Lua modules and functions are available:
+The aim of embLua (includes the complete Lua 5.3.4 core) is to provide C/C++ developers the possibility to extend their microcontroller/embedded device with scripting functionality. 
+The main focus of embLua is the fast/easy integration in custom projects and new platforms. Therefore only a subset of Lua modules and global functions are available:
 - table module
 - string module
-- math: abs, acos, asin, atan, ceil, cos, deg, exp, tointeger, floor, fmod, ult, log, max, modf, rad, random, randomseed, sin, sqrt, tan, type, pi, huge, maxinteger, mininteger
+- math module
 - global functions: assert, collectgarbage, error, getmetatable, ipairs, next, pairs, pcall, print, rawequal, rawlen, rawget, rawset, select, setmetatable, tonumber, tostring, type, xpcall, loadstring, load
 
 Note: The math module is only included if the define LUA_WITH_MATH is defined in luaProjectConfig.h.
 
 ## embLua requirements
 To run scripts which do something 'meaningful' embLua needs:
-- 13 Heap
-- 1k stack
+- RAM: 12k
 - ROM (not optimized code): 120 on MSP430, 90k on Renesas
 - C-Library
 
