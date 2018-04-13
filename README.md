@@ -38,7 +38,7 @@ embLua can be configured to use the build in memory management functions (embLua
 WITH_PRECOMPILED_SCRIPTS: If Lua shall execute precompiled script (luac.exe) then this define must be set.
 
 ## Embedding lua scripts
-To execute a Lua script the function dostring (embLua/lua/helperluaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
+To execute a Lua script the function dostring (embLua/lua/helper/luaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
 
 ### Compiling a Lua script into ROM
 For this purpose embLua/lua/convertToHeader.lua can be used. This script converts a Lua script into a header file. To run this script the header file must be included and dofile with the name of the header file must be called (an example can be found in embLua/examples/MSP430F6747A_FreeRTOS/main.c).
