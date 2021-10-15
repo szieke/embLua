@@ -35,7 +35,7 @@ embLua can be configured to use the build in memory management functions (embLua
 - luaPointerSize_t: If the size of size_t is not the pointer size on the current platform then this define must be set (example: on the MSP430 the pointer size is 32Bit but size_t is only 16Bit)
 - LUA_DECIMAL_POINT: The "radix character" (decimal point) used by Lua is per default '.'. With this define this character can be changed.
 - LUA_WITH_MATH: If the math module shall be included then this define must be set.
-WITH_PRECOMPILED_SCRIPTS: If Lua shall execute precompiled script (luac.exe) then this define must be set.
+- WITH_PRECOMPILED_SCRIPTS: If Lua shall execute precompiled script (luac.exe) then this define must be set.
 
 ## Embedding lua scripts
 To execute a Lua script the function dostring (embLua/lua/helper/luaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
