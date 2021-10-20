@@ -47,7 +47,3 @@ Under embLua/examples/MSP430F6747A_FreeRTOS/luaProject/Scripts a batch file can 
 
 ## Extending embLua
 To extend embLua with custom module/functions the define LUA_INTERFACE_LIBS can be used. An example can be found under embLua/examples/MSP430F6747A_FreeRTOS/luaProject/luaInterface.h
-
-
-# Downloads (release 01.00)
-- https://sourceforge.net/projects/emblua/files/latest/download
