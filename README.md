@@ -26,9 +26,9 @@ This file is used to configure embLua (an example can be found under embLua/exam
 #### Memory management 
 embLua can be configured to use the build in memory management functions (embLua/lua/helper/luaHeap.c) or to use project specific memory functions. To configure the memory management following defines are used:
 
-- LUA_HEAP_SIZE: The heap size if the build in memory management shall be used
-- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used protect the memory management calls if several Lua instance in different tasks are created
-- DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS: If the build in memory function shall not be used then this define must be set.
+- DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS: If the standard memory management functions shall be used then this define must be set, if it is not set then the memory functions in lus/helper/luaHeap.c are used
+- LUA_HEAP_SIZE: The heap size if the standard memory management shall not be used (DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS is not defined)
+- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the memory management calls if several Lua instances in different tasks are created (only neded if DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS is not defined)
 - luaMallocFunction(size) and luaFreeFunction(pointer): These defines must be set if the build in memory management shall not be used (*DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS*)
 
 #### Other configuration options 
