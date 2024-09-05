@@ -15,7 +15,7 @@ void luaAbort(void);
 //If the math module shall be included then this define must be defined.
 //define LUA_WITH_MATH
 
-//The heap size if the standard memory management shall not be used .
+//The size of the heap used by Lua.
 #define LUA_HEAP_SIZE (20000)
 
 //These defines are used to protect the memory management calls if several Lua instances in different threads are created.
