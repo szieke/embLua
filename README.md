@@ -24,10 +24,10 @@ To integrate embLua in a custom project:
 This file is used to configure embLua (an example can be found under embLua/examples/STM32L552/luaProject). 
 
 #### Memory management 
-To configure the memory management following defines are used:
+embLua uses its own heap implementation. To configure this heap following defines are used:
 
-- LUA_HEAP_SIZE: The heap size if the standard memory management shall not be used.
-- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the memory management calls if several Lua instances in different threads are created.
+- LUA_HEAP_SIZE: The size of the heap used by Lua.
+- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the heap calls if several Lua instances in different threads are created.
 
 #### Other configuration options 
 - LUA_DECIMAL_POINT: The "radix character" (decimal point) used by Lua is per default '.'. With this define this character can be changed.
