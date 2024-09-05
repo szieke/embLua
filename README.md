@@ -11,7 +11,7 @@ Note: The math module is only included if the define LUA_WITH_MATH is defined in
 To run scripts which do something 'meaningful' embLua needs:
 - TI CC2642R1: 2k stack, 20k Heap, 160k ROM (-O0), 100k ROM (-Oz)
 - STM32L552: 2k stack, 20k Heap, 210k ROM (-O0), 120k ROM (-Os)
-- Renesas RX64M: 3k stack, 20k Heap, 135k ROM (no optimizations), 95k ROM (max. otimizations)
+- Renesas RX64M: 3k stack, 20k Heap, 135k ROM (no optimizations), 95k ROM (max. optimizations)
 - C-Library
 
 ## Integrating embLua
