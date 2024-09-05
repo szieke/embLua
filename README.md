@@ -41,7 +41,7 @@ To configure the memory management following defines are used:
 To execute a Lua script the function dostring (embLua/lua/helper/luaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
 
 ### Compiling a Lua script into ROM
-For this purpose embLua/lua/convertToHeader.lua can be used. This script converts a Lua script into a header file. To run this script the header file must be included and dofile with the name of the header file must be called (an example can be found in embLua/examples/STM32L552/main.c).
+For this purpose embLua/lua/convertToHeader.lua can be used. This script converts all Lua scripts in a given directory (sript argument) into header files. To run these scripts the header files must be included and dofile with the name of these header files must be called (an example can be found in embLua/examples/STM32L552/main.c).
 
 Under embLua/examples/STM32L552/luaProject/Scripts a batch file can be found (convertToHeader.bat) which shows the usage of convertToHeader.lua.
 
