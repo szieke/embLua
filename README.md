@@ -35,7 +35,7 @@ To configure the memory management following defines are used:
 
 #### Needed functions 
 - void luaAbort(void): This function is called by Lua if it cannot handle an occurred error.
-- lua_writestring, lua_writeline, lua_writestringerror: These function are called by lua to print texts.
+- lua_writestring(string,length), lua_writeline, lua_writestringerror(string,length): These function are called by lua to print texts.
 
 ## Embedding lua scripts
 To execute a Lua script the function dostring (embLua/lua/helper/luaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
