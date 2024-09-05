@@ -26,8 +26,8 @@ This file is used to configure embLua (an example can be found under embLua/exam
 #### Memory management 
 To configure the memory management following defines are used:
 
-- LUA_HEAP_SIZE: The heap size if the standard memory management shall not be used (DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS is not defined)
-- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the memory management calls if several Lua instances in different threads are created (only neded if DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS is not defined)
+- LUA_HEAP_SIZE: The heap size if the standard memory management shall not be used.
+- LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the memory management calls if several Lua instances in different threads are created.
 
 
 #### Other configuration options 
