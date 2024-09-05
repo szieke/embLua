@@ -29,10 +29,13 @@ To configure the memory management following defines are used:
 - LUA_HEAP_SIZE: The heap size if the standard memory management shall not be used.
 - LUA_MEM_ENTER_CRITICAL_SECTION and LUA_MEM_LEAVE_CRITICAL_SECTION: These defines are used to protect the memory management calls if several Lua instances in different threads are created.
 
-
 #### Other configuration options 
 - LUA_DECIMAL_POINT: The "radix character" (decimal point) used by Lua is per default '.'. With this define this character can be changed.
 - LUA_WITH_MATH: If the math module shall be included then this define must be set.
+
+#### Needed functions 
+- void luaAbort(void): This function is called by Lua if it cannot handle an occurred error.
+- lua_writestring, lua_writeline, lua_writestringerror: These function are called by lua to print texts.
 
 ## Embedding lua scripts
 To execute a Lua script the function dostring (embLua/lua/helper/luaHelper.c) can be used. This function can execute scipts wich resides in the RAM or in the ROM.
