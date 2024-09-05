@@ -1,8 +1,0 @@
-################################################################################
-# Automatically-generated file. Do not edit!
-################################################################################
-
-export INC_RX=D:\Sartorius\Sartocheck\src\au\trunk\tools\toolchain\include
-export RXC_LIB=D:\Sartorius\Sartocheck\src\au\trunk\tools\toolchain\bin
-export BIN_RX=D:\Sartorius\Sartocheck\src\au\trunk\tools\toolchain\bin
-PATH := $(PATH):D:\Sartorius\Sartocheck\src\au\trunk\tools\toolchain\bin

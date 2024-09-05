@@ -9,14 +9,14 @@
 
 #define lua_c
 
-#include "../../../lua/lprefix.h"
+#include "lprefix.h"
 #include <string.h>
 
-#include "../../../lua/lua.h"
-#include "../../../lua/lauxlib.h"
-#include "../../../lua/lualib.h"
+#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
 
-#include "../../../lua/helper/luaHelper.h"
+#include "luaHelper.h"
 
 #include "script1.h"
 #include "script2.h"
@@ -34,6 +34,7 @@ extern "C"
 
 void main(void)
 {
+	char* mesg;
   /* ---- Disable maskable interrupts ---- */
   clrpsw_i();
 
@@ -47,59 +48,61 @@ void main(void)
 
   setpsw_i();
 
-  lua_writestringWithoutsize("Start\n");
+  mesg = "Start\n";
+  lua_writestring(mesg, strlen(mesg));
 
-  lua_State *L = luaL_newstate(); /* create state */
+  //Create the lua state.
+  lua_State *L = luaL_newstate();
   if (L == NULL)
   {
-    lua_writestringWithoutsize("cannot create state: not enough memory");
-    while (1)
-      ;
+    mesg = "cannot create state: not enough memory";
+    lua_writestring(mesg, strlen(mesg));
+    while (1);
   }
   else
   {
-    luaL_openlibs(L); /* open standard libraries */
-    
+	//Open the standard libraries.
+    luaL_openlibs(L);
+
+    //Load the helper script.
     if (dostring(L, helperScript, "helperScript") != LUA_OK)
     {
-      while (1)
-      {
-      };
+      while (1);
     }
 
     while (1)
     {
-
+      //Execute script 1.
       if (dostring(L, script1, "script1") != LUA_OK)
       {
-        while (1)
-          ;
+        while (1);
       }
 
-      lua_gc(L, LUA_GCCOLLECT, 0); //collect garbage
+      //Collect garbage.
+      lua_gc(L, LUA_GCCOLLECT, 0);
 
       lua_writeline();
 
+      //Execute script 2.
       if (dostring(L, script2, "script2") != LUA_OK)
       {
-        while (1)
-          ;
+        while (1);
       }
 
       lua_writeline();
       printMinimumFreeHeap();
 
-      lua_writestringWithoutsize("\n****************************************************************************\n");
+      mesg = "\n****************************************************************************\n";
+      lua_writestring(mesg, strlen(mesg));
 
-    }
+    }//while (1)
   }
 }
 
 #ifdef __cplusplus
 void abort(void)
 {
-  lua_writestringWithoutsize("\nabort\n");
-
+  lua_writestring("\nabort\n", sizeof("\nabort\n") - 1);
 }
 #endif
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Configs>
+  <versionXML>1.1</versionXML>
+  <Config Core="SINGLE_CORE">
+    <TimeUnit TimeUnit="Nanosecond"/>
+    <Timer_Settings>
+      <Timer Break_on_Overflow="false" Link_Timer="false" Reset_before_run="false" Run_once_only="false" Timer_ID="Run-Break" Timer_Mode="PERF_RUN_BREAK" Wrap_on_Overflow="false"/>
+      <Timer Break_on_Overflow="false" Link_Timer="false" Reset_before_run="false" Run_once_only="false" Timer_ID="Timer 1" Timer_Mode="PERF_OFF" Wrap_on_Overflow="false"/>
+      <Timer Break_on_Overflow="false" Link_Timer="false" Reset_before_run="false" Run_once_only="false" Timer_ID="Timer 2" Timer_Mode="PERF_OFF" Wrap_on_Overflow="false"/>
+    </Timer_Settings>
+  </Config>
+  <EnablePerfAnalysis Status="false"/>
+</Configs>

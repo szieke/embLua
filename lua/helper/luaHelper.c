@@ -1,5 +1,4 @@
 
-#include "luaHelper.h"
 #include "../lua.h"
 #include "../lauxlib.h"
 #include "../lualib.h"
@@ -21,6 +20,15 @@ static int report (lua_State *L, int status) {
   return status;
 }
 
+
+/**
+ * Executes a lua script.
+ *
+ * @param L The lua state.
+ * @param s The script.
+ * @param name The name of the script.
+ * @return LUA_OK on success.
+ */
 int dostring (lua_State *L, const char *s, const char *name)
 {
   int status = luaL_loadbuffer(L, s, strlen(s), name);

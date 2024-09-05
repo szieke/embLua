@@ -7,8 +7,7 @@
 #include <stdlib.h>
 #include "../luaconf.h"
 #include "luaHeap.h"
-
-#ifndef DONT_USE_LUA_HEAP_MANAGEMENT_FUNCTIONS
+#include "luaProjectConfig.h"
 
 /* Block sizes must not get too small. */
 #define LUA_HEAP_MINIMUM_BLOCK_SIZE	( ( size_t ) ( xHeapStructSize << 1 ) )
@@ -72,7 +71,7 @@ static size_t xBlockAllocatedBit = 0;
 
 /*-----------------------------------------------------------*/
 
-void *luaMalloc( size_t xWantedSize )
+void *luaMallocFunction( size_t xWantedSize )
 {
 BlockLink_t *pxBlock, *pxPreviousBlock, *pxNewBlockLink;
 void *pvReturn = NULL;
@@ -175,7 +174,7 @@ void *pvReturn = NULL;
 }
 /*-----------------------------------------------------------*/
 
-void luaFree( void *pv )
+void luaFreeFunction( void *pv )
 {
 uint8_t *puc = ( uint8_t * ) pv;
 BlockLink_t *pxLink;
@@ -210,13 +209,13 @@ BlockLink_t *pxLink;
 }
 /*-----------------------------------------------------------*/
 
-size_t LuaGetFreeHeapSize( void )
+size_t luaGetFreeHeapSize( void )
 {
 	return xFreeBytesRemaining;
 }
 /*-----------------------------------------------------------*/
 
-size_t LuaGetMinimumEverFreeHeapSize( void )
+size_t luaGetMinimumEverFreeHeapSize( void )
 {
 	return xMinimumEverFreeBytesRemaining;
 }
@@ -324,7 +323,4 @@ uint8_t *puc;
 	}
 
 }
-
-
-#endif
 

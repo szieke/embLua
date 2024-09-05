@@ -6,7 +6,8 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>com.renesas.cdt.core.genmakebuilder</name>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -16,13 +17,17 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>com.renesas.cdt.stackanalysis.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.cdt.core.cnature</nature>
-		<nature>com.renesas.cdt.core.kpitcnature</nature>
-		<nature>com.renesas.cdt.core.kpitccnature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
 	<linkedResources>
 		<link>
@@ -101,6 +106,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/lua/ldo.h</locationURI>
 		</link>
 		<link>
+			<name>src/lua/ldump.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/lua/ldump.c</locationURI>
+		</link>
+		<link>
 			<name>src/lua/lfunc.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/lfunc.c</locationURI>
@@ -124,6 +134,11 @@
 			<name>src/lua/linit.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/linit.c</locationURI>
+		</link>
+		<link>
+			<name>src/lua/ljumptab.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/lua/ljumptab.h</locationURI>
 		</link>
 		<link>
 			<name>src/lua/llex.c</name>
@@ -291,11 +306,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/convertToHeader.lua</locationURI>
 		</link>
 		<link>
-			<name>src/lua/helper/lua-5.2.4_Win32_bin</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
 			<name>src/lua/helper/luaHeap.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHeap.c</locationURI>
@@ -314,16 +324,6 @@
 			<name>src/lua/helper/luaHelper.h</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/luaHelper.h</locationURI>
-		</link>
-		<link>
-			<name>src/lua/helper/lua-5.2.4_Win32_bin/lua52.dll</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/lua-5.2.4_Win32_bin/lua52.dll</locationURI>
-		</link>
-		<link>
-			<name>src/lua/helper/lua-5.2.4_Win32_bin/lua52.exe</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/lua/helper/lua-5.2.4_Win32_bin/lua52.exe</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>

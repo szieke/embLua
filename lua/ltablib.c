@@ -1,5 +1,5 @@
 /*
-** $Id: ltablib.c,v 1.93 2016/02/25 19:41:54 roberto Exp $
+** $Id: ltablib.c $
 ** Library for Table Manipulation
 ** See Copyright Notice in lua.h
 */
@@ -59,8 +59,9 @@ static void checktab (lua_State *L, int arg, int what) {
 
 
 static int tinsert (lua_State *L) {
-  lua_Integer e = aux_getn(L, 1, TAB_RW) + 1;  /* first empty element */
   lua_Integer pos;  /* where to insert new element */
+  lua_Integer e = aux_getn(L, 1, TAB_RW);
+  e = luaL_intop(+, e, 1);  /* first empty element */
   switch (lua_gettop(L)) {
     case 2: {  /* called with only 2 arguments */
       pos = e;  /* insert new element at the end */
@@ -69,7 +70,9 @@ static int tinsert (lua_State *L) {
     case 3: {
       lua_Integer i;
       pos = luaL_checkinteger(L, 2);  /* 2nd argument is the position */
-      luaL_argcheck(L, 1 <= pos && pos <= e, 2, "position out of bounds");
+      /* check whether 'pos' is in [1, e] */
+      luaL_argcheck(L, (lua_Unsigned)pos - 1u < (lua_Unsigned)e, 2,
+                       "position out of bounds");
       for (i = e; i > pos; i--) {  /* move up elements */
         lua_geti(L, 1, i - 1);
         lua_seti(L, 1, i);  /* t[i] = t[i - 1] */
@@ -89,14 +92,16 @@ static int tremove (lua_State *L) {
   lua_Integer size = aux_getn(L, 1, TAB_RW);
   lua_Integer pos = luaL_optinteger(L, 2, size);
   if (pos != size)  /* validate 'pos' if given */
-    luaL_argcheck(L, 1 <= pos && pos <= size + 1, 1, "position out of bounds");
+    /* check whether 'pos' is in [1, size + 1] */
+    luaL_argcheck(L, (lua_Unsigned)pos - 1u <= (lua_Unsigned)size, 2,
+                     "position out of bounds");
   lua_geti(L, 1, pos);  /* result = t[pos] */
   for ( ; pos < size; pos++) {
     lua_geti(L, 1, pos + 1);
     lua_seti(L, 1, pos);  /* t[pos] = t[pos + 1] */
   }
   lua_pushnil(L);
-  lua_seti(L, 1, pos);  /* t[pos] = nil */
+  lua_seti(L, 1, pos);  /* remove entry t[pos] */
   return 1;
 }
 
@@ -141,9 +146,9 @@ static int tmove (lua_State *L) {
 
 static void addfield (lua_State *L, luaL_Buffer *b, lua_Integer i) {
   lua_geti(L, 1, i);
-  if (!lua_isstring(L, -1))
-    luaL_error(L, "invalid value (%s) at index %d in table for 'concat'",
-                  luaL_typename(L, -1), i);
+  if (l_unlikely(!lua_isstring(L, -1)))
+    luaL_error(L, "invalid value (%s) at index %I in table for 'concat'",
+                  luaL_typename(L, -1), (LUAI_UACINT)i);
   luaL_addvalue(b);
 }
 
@@ -173,7 +178,7 @@ static int tconcat (lua_State *L) {
 ** =======================================================
 */
 
-static int pack (lua_State *L) {
+static int tpack (lua_State *L) {
   int i;
   int n = lua_gettop(L);  /* number of elements to pack */
   lua_createtable(L, n, 1);  /* create result table */
@@ -186,13 +191,14 @@ static int pack (lua_State *L) {
 }
 
 
-static int unpack (lua_State *L) {
+static int tunpack (lua_State *L) {
   lua_Unsigned n;
   lua_Integer i = luaL_optinteger(L, 2, 1);
   lua_Integer e = luaL_opt(L, luaL_checkinteger, 3, luaL_len(L, 1));
   if (i > e) return 0;  /* empty range */
   n = (lua_Unsigned)e - i;  /* number of elements minus 1 (avoid overflows) */
-  if (n >= (unsigned int)INT_MAX  || !lua_checkstack(L, (int)(++n)))
+  if (l_unlikely(n >= (unsigned int)INT_MAX  ||
+                 !lua_checkstack(L, (int)(++n))))
     return luaL_error(L, "too many results to unpack");
   for (; i < e; i++) {  /* push arg[i..e - 1] (to avoid overflows) */
     lua_geti(L, 1, i);
@@ -226,6 +232,7 @@ typedef unsigned int IdxT;
 */
 #if !defined(l_randomizePivot)		/* { */
 
+/*#include <time.h>*/
 
 /* size of 'e' measured in number of 'unsigned int's */
 #define sof(e)		(sizeof(e) / sizeof(unsigned int))
@@ -243,7 +250,7 @@ static int32_t randtbl[31] =
     -205601318,
 };
 
-static int32_t getRandomNumber()
+int32_t l_getRandomNumber(void)
 {
   int32_t result = randtbl[randomTableIndex++];
 
@@ -256,8 +263,8 @@ static int32_t getRandomNumber()
 }
 
 static unsigned int l_randomizePivot (void) {
-  int32_t c = getRandomNumber();
-  int32_t t = getRandomNumber();
+  int32_t c = l_getRandomNumber();
+  int32_t t = l_getRandomNumber();
   unsigned int buff[sof(c) + sof(t)];
   unsigned int i, rnd = 0;
   memcpy(buff, &c, sof(c) * sizeof(unsigned int));
@@ -313,15 +320,15 @@ static IdxT partition (lua_State *L, IdxT lo, IdxT up) {
   /* loop invariant: a[lo .. i] <= P <= a[j .. up] */
   for (;;) {
     /* next loop: repeat ++i while a[i] < P */
-    while (lua_geti(L, 1, ++i), sort_comp(L, -1, -2)) {
-      if (i == up - 1)  /* a[i] < P  but a[up - 1] == P  ?? */
+    while ((void)lua_geti(L, 1, ++i), sort_comp(L, -1, -2)) {
+      if (l_unlikely(i == up - 1))  /* a[i] < P  but a[up - 1] == P  ?? */
         luaL_error(L, "invalid order function for sorting");
       lua_pop(L, 1);  /* remove a[i] */
     }
     /* after the loop, a[i] >= P and a[lo .. i - 1] < P */
     /* next loop: repeat --j while P < a[j] */
-    while (lua_geti(L, 1, --j), sort_comp(L, -3, -1)) {
-      if (j < i)  /* j < i  but  a[j] > P ?? */
+    while ((void)lua_geti(L, 1, --j), sort_comp(L, -3, -1)) {
+      if (l_unlikely(j < i))  /* j < i  but  a[j] > P ?? */
         luaL_error(L, "invalid order function for sorting");
       lua_pop(L, 1);  /* remove a[j] */
     }
@@ -336,6 +343,7 @@ static IdxT partition (lua_State *L, IdxT lo, IdxT up) {
     /* otherwise, swap a[i] - a[j] to restore invariant and repeat */
     set2(L, i, j);
   }
+  return 0;
 }
 
 
@@ -352,7 +360,7 @@ static IdxT choosePivot (IdxT lo, IdxT up, unsigned int rnd) {
 
 
 /*
-** QuickSort algorithm (recursive function)
+** Quicksort algorithm (recursive function)
 */
 static void auxsort (lua_State *L, IdxT lo, IdxT up,
                                    unsigned int rnd) {
@@ -426,8 +434,8 @@ static int sort (lua_State *L) {
 static const luaL_Reg tab_funcs[] = {
   {"concat", tconcat},
   {"insert", tinsert},
-  {"pack", pack},
-  {"unpack", unpack},
+  {"pack", tpack},
+  {"unpack", tunpack},
   {"remove", tremove},
   {"move", tmove},
   {"sort", sort},
@@ -437,9 +445,6 @@ static const luaL_Reg tab_funcs[] = {
 
 LUAMOD_API int luaopen_table (lua_State *L) {
   luaL_newlib(L, tab_funcs);
-  /* _G.unpack = table.unpack */
-  lua_getfield(L, -1, "unpack");
-  lua_setglobal(L, "unpack");
   return 1;
 }
 
